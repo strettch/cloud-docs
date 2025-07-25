@@ -1,0 +1,101 @@
+---
+title: "Computes"
+description: "Spin up, resize, or destroy cloud instances with a few clicks or via API. Built for scale — managed for performance."
+---
+
+## Managing Computes
+
+ Navigate to **Computes** tab.
+
+    ## Create new compute
+
+    <AccordionGroup>
+  <Accordion title="Creating a compute" icon="rocket" iconType="solid">
+First, Click **New Compute**. You will be redirected to a Create nee SC compute page where you will find sections and configuration and options you wish for your compute to have.
+    
+ Upon reaching the page you will have to complete the following sections: 
+
+        * **Choose Location:** Select a hosting location for your server. Your choice affects network speed and latency, ensuring optimal performance.
+       * **Choose Image:** Select an image to use for your compute.
+       <Frame>
+      <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+       * **Choose Type:** Select Your Compute Configuration i.e it can either be `shared` od `dedicated` CPU
+       <Frame>
+      <img src="/images/computes/choose-type.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+       <Warning>After choosing the type you are required to specify the specs of your compute, you will need to check specs like: **CPU**, **RAM**, **Storage** and **Prices** </Warning>
+       * **Set Root password:** Connect to your compute as the **root** user via password.
+       <Warning>Please store your password securely. You will not be sent an email containing the compute's details or password.</Warning>
+        * **Compute Name:** Give your Computes an identifying name you will remember them by.
+        * **Add Tags (Optional):** Easily Identify and Manage Your Computes with Custom Tags.
+
+  </Accordion>
+
+  <Accordion title="Create compute" icon="message" iconType="solid">
+   After selecting configuring your  compute you can now create the compute provided you are eligible and have a sufficient amount of creadits for that compute.
+  </Accordion>
+</AccordionGroup>
+ <Frame>
+      <img src="/images/computes/create-compute.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+<Warning>Remember to copy and paste the nameservers provided to you to you domain provider, otherwise the domain you will create will be inactive until you do so.</Warning>
+
+## Computes monitoring
+
+ After creating your compute you can start to work with and monitor the domain. CLick on the **compute name** wile on the **Computes** tab and you will be taken to the advanced view of the compute: 
+
+## Compute monitoring graphs
+
+Compute graphs are up-to-the-minute visualizations of how your server is performing over time. They let you monitor Computes performance metrics in the control panel.
+
+Computes come with some graphs available by default, and there are additional graphs available when you enable the free **SC-Metrics Agent**.
+    <Warning>If you choose to uninstall the **SC-Metrics Agent** on your computes we will not be able to collect the metrics from your compute and hence your monitoring graphs will be empty</Warning>
+
+
+    <Frame>
+     <img src="/images/computes/compute-overview.png" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+    To view a Compute’s graphs, click its name on the dashboard. You arrive directly on the compute page. By default, five graphs are available for any Compute:
+
+* The **Memory** public chart displays public memory usage in megabits per second. Incoming bandwidth is dark purple and outgoing bandwidth is light purple.
+* The **CPU usage** shows the percent of total processing power being used, with light blue for user jobs and dark blue for system processes.
+* The **Disk I/O** displays disk read and write operations in megabytes per second, with read operations in dark green and write operations in light green.*
+* The **Network** chart displays the traffic amount both in and out of the compute (packets).
+* The **Load** chart displays the amount of resources being handled by the server at a certain point in time (measured in MBs.)
+
+## Metrics Agent
+
+The Compute graphs use metrics collected by external tools; they require no additional services on the compute itself. You can enable additional metrics graphs and alerting with the SC-Metrics agent, which is a small utility that runs on the Compute.
+
+You can install the metrics agent automatically when you provision a COmpute or after a Compute has been created.
+
+Once the agent is installed, you’ll ba able to get the metrics recorded from your compute to your compute dashboard.
+
+The Compute graph time frame options are 1 hour,  6 hours, 24 hours, 7 days, 30 days or 90 days. Data resolution is based on number of points, with a fixed number of points per plot. When you mouse over any of the graphs, a line appears on all of them, pinpointing a moment in time. A graph legend appears along with metrics for that specific point in time.
+
+## Access Compute's console
+
+Once the SC Agent is installed (and configured if necessary) which might take up to **5 minutes**, you can access the Compute Console from the Compute Control Panel.
+
+First, click the name of the Compute you want to access to expand its detail window. From the detail page, click the Console button in the left menu.
+
+ <Frame>
+     <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+## Turn ON/OFF your compute
+ 
+ To turn ON/OFF a Compute from the control panel, click on the computes name from the dashboard and once on the compute'c control panel. Once in the details page, you can click the swicth button next to the console button from the left menu.
+
+ When you turn off a Droplet from the control panel, we first try a graceful shutdown. If that fails, we do a forced shutdown, which may corrupt data. To ensure data integrity, we recommend shutting down from the command line with poweroff.
+  <Warning>You will still be billed for a turned off Compute. To end billing, destroy the compute instead.</Warning>
+
+<Frame>
+     <img src="/images/computes/turn-on-off.png" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+<Note>
+  **Need help?** Contact our [support team](mailto:contact@strettch.com) or stay tuned at [our site](https://cloud.strettch.com).
+</Note>

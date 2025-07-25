@@ -33,7 +33,7 @@ description: "Manage domains with ease. Enterprise-grade DNS performance with in
 
 ## Verify you domain Status 
 
- After creating your domain you will be redirscted to the listing of all domains specific to that team. where you can easily identify the statuses of the domains created: 
+ After creating your domain you will be redirected to the listing of all domains specific to that team. where you can easily identify the statuses of the domains created: 
     * after a domain is created it may take **3 min** to **24 hours** to activate it and when the domain is activating you will se the status **activating**
     * A domain that is active and thus operation will have an active status and success flag.
     * A domain that goes beyond 24 hours whilst still being not active will be considered as inactive.
@@ -45,10 +45,11 @@ description: "Manage domains with ease. Enterprise-grade DNS performance with in
      <img src="/images/domains/verify-domain-status.png" style={{ borderRadius: '0.2rem' }} />
     </Frame>
 
-## Adding DNS records to a domain 
+## Managing DNS records 
 
-    After creating a domain, once it becomes active you can no access it and add records of various types to the domain:
+    Once a domain has been added and is using Strettch cloud's nameservers, you can view its DNS records from the **Domains** page. From there, you can view, add, verify, remove the records, or add presets.
 
+     <Warning>To make sure DNS records are applied, and to allow you to manage them, your domain needs to use **Strettch Cloud's nameservers** . If you are using a third-party domain, you will be provided with the Strettch CLoud's nameservers to copy and use with your registrar.</Warning>
     Here's a list of record types we support: 
    
 | Record Type     | Hostname (example) | Description |
@@ -60,6 +61,62 @@ description: "Manage domains with ease. Enterprise-grade DNS performance with in
 | **MX**     | example.com   | mail handled by mail.example.com |
 | **CNAME** | blog.example.com | is an alias of wiki.example.com|
 
+Now let's go straight to adding our DNS records.
+
+ <AccordionGroup>
+  <Accordion title="Selecting your domain" icon="1" iconType="solid">
+    On your team's **dashboard**, select the Domains tab. From the Domains page, click on a domain of your choice to view its Advanced Settings page.
+  </Accordion>
+
+  <Accordion title="Add DNS Record" icon="2" iconType="solid">
+    Once on the Advanced Settings page of your domain, select the **Add new record** button to fill out the DNS Record form. Once complete, click on the **Create Record** button.
+    <Frame>
+      <img src="/images/domains/new-record.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+
+You can then create a new DNS record with the following data:
+
+* **Name:** The prefix or location of the record. For **www.example.com**, the name argument would be **www**.
+
+* **Type:** Types can be `A`, `AAAA`, `CAA`, `CNAME`, `MX`, `NS`, `SRV`, or `TXT`.
+
+* **Value:** The value of the record.
+
+* **TTL:** Default is 60 seconds. For advanced users, this value can be customized.
+
+* **Comment:** An optional comment to provide context on what this record is for.
+
+* **More:** Some records will require more data. MX records, for example, will request "priority".
+
+## Verifying DNS Records
+
+Once DNS records have been changed, you may wish to check that these have been set correctly. There are many third-party tools that do this, such as DNS Checker and DNS Map - these show the state of your DNS records in different regions of the world.
+
+You can also use the dig command to check the DNS record for your domain:
+
+<CodeGroup>
+```bash A records example on Windows, MacOs, Linux
+$ dig A api.example.com +short
+```
+
+```bash Mx example on Windows, MacOs, Linux
+$ dig MX example.com +short
+```
+</CodeGroup>
+
+
+## Removing DNS Records
+
+To remove DNS records:
+
+* On your team's **dashboard**, select the **Domains** tab. From the Domains page, click on a domain of your choice to view its Advanced Settings page.
+* Select the ellipsis (⋯) to access the context menu and select **Delete**. Follow the prompts to delete the record.
+
+<Frame>
+      <img src="/images/domains/delete-dns.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
 <Note>
   **Need help?** Contact our [support team](mailto:contact@strettch.com) or stay tuned at [our site](https://cloud.strettch.com).
 </Note>
