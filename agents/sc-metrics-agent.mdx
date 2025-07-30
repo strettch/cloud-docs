@@ -1,0 +1,131 @@
+---
+title: "SC Metrics Agent"
+description: "How to use our SC-agent for proper monitoring"
+---
+
+The Strettch Cloud metrics agent is an open-source Go utility that collects system-level metrics and forwards them to Strettch Cloud. It enables extended Compute monitoring features, including usage graphs, alerting, and custom metrics.
+
+The metrics agent is supported on Ubuntu 14.04 or later, CentOS 6 or later, Debian 8 or later, and Fedora 27 or later.It is automatically installed upon compute creation and can be installed manually afterward using a script, by configuring repositories directly, or run it as a Docker container. To stop using the agent, you can uninstall it at any time.
+## Enable the Metrics Agent During Droplet Creation 
+
+When a compute is created, we ensure the script to install the metrics agent is run to start collecting metrics information upon compute creation. This is possible via the script that we will dive deep into in the sections to follow.
+## Install the Metrics Agent Manually Using the Script 
+The installation script detects your operating system, configures the correct Strettch Cloud package repository, installs the metrics-agent package using your system’s package manager, and enables the service.
+
+To begin installing the metrics agent, go to the Strettch Cloud dashboard compute page and find the compute where you want to install the metrics agent for.
+
+Afterwards, beside the compute, click its name, and then click on the **Console button** to open the Compute’s Console page. 
+
+You can run the script directly or review it before executing.
+
+## Install and Run Script 
+To install the agent in a single step, download the metrics agent installation script and run it immediately:
+
+<CodeGroup>
+``` command to install the agent
+curl -sSL https://sc.repo.cloud.strettch.dev/install.sh | sudo bash
+```
+</CodeGroup>
+
+After you run the command, the script verifies compatibility, installs system dependencies, adds the appropriate package repositories, and installs the metrics agent. The script returns output similar to the following:
+
+```
+Cleaning up old sources...OK
+Verifying machine compatibility...OK
+Verifying compatibility with script...OK
+Installing apt repository...
+...
+Installing gpg key...Selecting previously unselected package do-agent.
+...
+Preparing to unpack .../sc-metrics-agent_3.17.1_amd64.deb ...
+Unpacking do-agent (3.17.1) ...
+Setting up do-agent (3.17.1) ...
+Detecting SELinux
+SELinux not enforced
+enable systemd service
+Created symlink '/etc/systemd/system/multi-user.target.wants/sc-metrics-agent.service' → '/etc/systemd/system/sc-metrics-agent.service'.
+...
+```
+After you run the script, verify the agent is running.
+
+Download, Inspect, and Run Script 
+Alternatively, you can review the script before running it to audit the changes it makes to your system. This helps maintain transparency, especially in production environments or when internal security policies require script review.
+
+To review the script before running it, save the script to **/tmp/install.sh**:
+```
+curl -sSL https://sc.repo.cloud.strettch.dev/install.sh -o /tmp/install.sh
+```
+This command produces no output. To confirm the file was downloaded successfully, check that it exists and has content using the following command:
+```
+ls -lh /tmp/install.sh
+```
+If the download was successful, the command returns output similar to this, confirming that the file exists at **/tmp/install.sh**:
+```
+-rw-r--r-- 1 root root 7.2K ... /tmp/install.sh
+```
+Then, run a **less command** to view the script contents:
+```
+less /tmp/install.sh
+```
+After reviewing the script, type **q** to exit the viewer.
+
+If you prefer not to use the installation script, you can install the agent manually using the repository.
+
+After reviewing the script, run the script manually with administrative privileges, completing the installation:
+```
+sudo bash /tmp/install.sh
+```
+The output confirms that the script verified compatibility, installed the do-agent package, and enabled the agent service to start on boot, like this:
+
+```
+Cleaning up old sources...OK
+Verifying machine compatibility...OK
+Verifying compatibility with script...OK
+Installing apt repository...
+Installing gpg key...Selecting previously unselected package do-agent.
+(Reading database ... 76045 files and directories currently installed.)
+Preparing to unpack .../sc-metrics-agent_3.17.1_amd64.deb ...
+Unpacking do-agent (3.17.1) ...
+Setting up do-agent (3.17.1) ...
+Detecting SELinux
+SELinux not enforced
+useradd: user 'sc-metrics-agent' already exists
+enable systemd service
+Created symlink '/etc/systemd/system/multi-user.target.wants/sc-metrics-agent.service' → '/etc/systemd/system/sc-metrics-agent.service'.
+...
+```
+## After installation, verify that the agent is running.
+
+In the computes page, go to your compute’s Graphs tab to view metrics. The metrics data appears a few minutes after the agent starts and begins reporting data.
+
+Verify the Metrics Agent is Running 
+To check if the status of the do-agent systemd service is active, run:
+```
+systemctl status sc-metrics-agent
+```
+If your metrics agent is active, you see output confirming that the agent is installed, actively running, and set to start automatically on boot:
+
+```
+● sc-metrics-agent.service - The Strettch Cloud Monitoring Agent
+     Loaded: loaded (/etc/systemd/system/sc-metrics-agent.service; enabled; preset: enabl>
+     Active: active (running) since Wed 2025-06-18 19:14:50 UTC; 35s ago
+ Invocation: da1c6db71e3b46f7919b61a295db71c1
+   Main PID: 4675 (do-agent)
+      Tasks: 4 (limit: 4655)
+     Memory: 3.7M (peak: 4.1M)
+        CPU: 51ms
+     CGroup: /system.slice/sc-metrics-agent.service
+             └─4675 /opt/strettch-cloud/bin/sc-metrics-agent --syslog
+             
+```
+Next, check if the agent process is running directly by searching for any running processes with the name sc-metrics-agent:
+```
+ps aux | grep sc-metrics-agent
+```
+If your metrics agent is running, you should see output that includes a line confirming the agent is running as a background process, like this:
+
+```
+sc-metrics-agent    4675  0.0  0.3 1237180 14712 ?       Ssl  19:14   0:00 /opt//bin/sc-metrics-agent --syslog
+root        4733  0.0  0.0   7156  2144 pts/0    S+   19:15   0:00 grep --color=auto sc-metrics-agent
+```
+If the service is not running or these commands return no output, contact [Strettch Cloud support](mailto:contact@strettch.com) for help troubleshooting the installation.
