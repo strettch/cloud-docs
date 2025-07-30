@@ -41,9 +41,10 @@
         "tab": "FAQs",
         "groups":[
           {
-            "group": "What you need to know",
+            "group": "Questions",
             "pages":[
-              "index"
+              "faqs/paying-your-bill",
+              "faqs/invoices"
             ]
           }
         ]
