@@ -53,7 +53,7 @@ Alternatively, you can review the script before running it to audit the changes 
 
 To review the script before running it, save the script to **/tmp/install.sh**:
 ```
-curl -sSL https://repos.insights.digitalocean.com/install.sh -o /tmp/install.sh
+curl -sSL https://sc.repo.cloud.strettch.dev/install.sh -o /tmp/install.sh
 ```
 This command produces no output. To confirm the file was downloaded successfully, check that it exists and has content using the following command:
 ```
@@ -106,7 +106,7 @@ systemctl status sc-metrics-agent
 If your metrics agent is active, you see output confirming that the agent is installed, actively running, and set to start automatically on boot:
 
 ```
-● sc-metrics-agent.service - The DigitalOcean Monitoring Agent
+● sc-metrics-agent.service - The Strettch Cloud Monitoring Agent
      Loaded: loaded (/etc/systemd/system/sc-metrics-agent.service; enabled; preset: enabl>
      Active: active (running) since Wed 2025-06-18 19:14:50 UTC; 35s ago
  Invocation: da1c6db71e3b46f7919b61a295db71c1
@@ -115,7 +115,7 @@ If your metrics agent is active, you see output confirming that the agent is ins
      Memory: 3.7M (peak: 4.1M)
         CPU: 51ms
      CGroup: /system.slice/sc-metrics-agent.service
-             └─4675 /opt/digitalocean/bin/sc-metrics-agent --syslog
+             └─4675 /opt/strettch-cloud/bin/sc-metrics-agent --syslog
              
 ```
 Next, check if the agent process is running directly by searching for any running processes with the name sc-metrics-agent:
@@ -125,7 +125,7 @@ ps aux | grep sc-metrics-agent
 If your metrics agent is running, you should see output that includes a line confirming the agent is running as a background process, like this:
 
 ```
-sc-metrics-agent    4675  0.0  0.3 1237180 14712 ?       Ssl  19:14   0:00 /opt/digitalocean/bin/sc-metrics-agent --syslog
+sc-metrics-agent    4675  0.0  0.3 1237180 14712 ?       Ssl  19:14   0:00 /opt//bin/sc-metrics-agent --syslog
 root        4733  0.0  0.0   7156  2144 pts/0    S+   19:15   0:00 grep --color=auto sc-metrics-agent
 ```
 If the service is not running or these commands return no output, contact [Strettch Cloud support](mailto:contact@strettch.com) for help troubleshooting the installation.
