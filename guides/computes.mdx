@@ -85,6 +85,40 @@ First, click the name of the Compute you want to access to expand its detail win
      <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
     </Frame>
 
+## Access Compute via SSH
+
+You can connect to your compute directly using SSH from your local terminal. This provides command-line access to your virtual machine.
+
+### SSH Connection
+
+To connect to your compute via SSH, use the following command with your compute's public IP address:
+
+<CodeGroup>
+```bash SSH into your compute
+ssh root@your-public-ip -p 222
+```
+</CodeGroup>
+
+Replace `your-public-ip` with your compute's actual public IP address, which you can find on the compute details page.
+
+<Note>
+**Port 222:** Currently, when connecting from most internet providers, you need to specify port 222 using the `-p 222` flag. However, if you're connecting from MTN network, you can connect without specifying the port (using default port 22).
+</Note>
+
+### Example
+
+<CodeGroup>
+```bash Example SSH connection
+ssh root@192.0.2.1 -p 222
+```
+</CodeGroup>
+
+You'll be prompted to enter the root password you set during compute creation.
+
+<Warning>
+Make sure you have your root password ready. If you've forgotten it, you can reset it using the console access.
+</Warning>
+
 ## Turn ON/OFF your compute
  
  To turn ON/OFF a Compute from the control panel, click on the computes name from the dashboard and once on the compute'c control panel. Once in the details page, you can click the swicth button next to the console button from the left menu.
