@@ -12,7 +12,7 @@
         "og:image": "https://res.cloudinary.com/dawr8i20o/image/upload/v1757404681/strettch-cloud/sc-web-app/logo_xzpltc.svg"
     }
 },
-  "favicon": "/logo.png",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
