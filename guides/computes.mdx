@@ -3,133 +3,161 @@ title: "Computes"
 description: "Spin up, resize, or destroy cloud instances with a few clicks or via API. Built for scale — managed for performance."
 ---
 
-## Managing Computes
+<AccordionGroup>
+  <Accordion title="Create Compute" icon="rocket" iconType="solid">
 
- Navigate to **Computes** tab.
+Navigate to the **Computes** tab and click **New Compute**. You'll need to configure the following:
 
-    ## Create new compute
+### 1. Choose Location
 
-    <AccordionGroup>
-  <Accordion title="Creating a compute" icon="rocket" iconType="solid">
-First, Click **New Compute**. You will be redirected to a Create nee SC compute page where you will find sections and configuration and options you wish for your compute to have.
-    
- Upon reaching the page you will have to complete the following sections: 
+Select a hosting location for your server. This affects network speed and latency for optimal performance.
 
-        * **Choose Location:** Select a hosting location for your server. Your choice affects network speed and latency, ensuring optimal performance.
-       * **Choose Image:** Select an image to use for your compute.
-       <Frame>
-      <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-       * **Choose Type:** Select Your Compute Configuration i.e it can either be `shared` od `dedicated` CPU
-       <Frame>
-      <img src="/images/computes/choose-type.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-       <Warning>After choosing the type you are required to specify the specs of your compute, you will need to check specs like: **CPU**, **RAM**, **Storage** and **Prices** </Warning>
-       * **Set Root password:** Connect to your compute as the **root** user via password.
-       <Warning>Please store your password securely. You will not be sent an email containing the compute's details or password.</Warning>
-        * **Compute Name:** Give your Computes an identifying name you will remember them by.
-        * **Add Tags (Optional):** Easily Identify and Manage Your Computes with Custom Tags.
+### 2. Choose Image
+
+Select an operating system image for your compute.
+
+<Frame>
+  <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+### 3. Choose Type
+
+Select your compute configuration: `shared` or `dedicated` CPU.
+
+<Frame>
+  <img src="/images/computes/choose-type.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+After choosing the type, specify your compute specs: **CPU**, **RAM**, **Storage**. Pricing is displayed alongside each configuration.
+
+### 4. Set Root Password
+
+Create a secure password for root user access.
+
+<Warning>
+Store your password securely. You will not receive an email with your compute details or password.
+</Warning>
+
+### 5. Compute Name & Tags
+
+- **Compute Name:** Give your compute an identifiable name
+- **Add Tags (Optional):** Organize and manage your computes with custom tags
+
+### 6. Create
+
+Review your configuration and pricing, then click **Create Compute**. You need sufficient credits to create the compute.
+
+<Frame>
+  <img src="/images/computes/create-compute.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+<Note>
+Your compute cost depends on the specs you selected. The price is shown during configuration.
+</Note>
 
   </Accordion>
 
-  <Accordion title="Create compute" icon="message" iconType="solid">
-   After selecting configuring your  compute you can now create the compute provided you are eligible and have a sufficient amount of creadits for that compute.
-  </Accordion>
-</AccordionGroup>
- <Frame>
-      <img src="/images/computes/create-compute.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-<Warning>Remember that the **accumulated cost of your compute depends on the specs you selected**, alongside the specification you will find the amount/price of the compute</Warning>
+  <Accordion title="Access Compute" icon="terminal" iconType="solid">
 
-## Computes monitoring
+### Web Console
 
- After creating your compute you can start to work with and monitor the domain. CLick on the **compute name** wile on the **Computes** tab and you will be taken to the advanced view of the compute: 
+Access your compute through a browser-based console. The [SC Agent](/agents/sc-agent) is automatically installed and ready within **5 minutes** of compute creation.
 
-## Compute monitoring graphs
+To open the console:
+1. Click your compute name
+2. Click **Console** in the left menu
 
-Compute graphs are up-to-the-minute visualizations of how your server is performing over time. They let you monitor Computes performance metrics in the control panel.
+<Frame>
+  <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
 
-Computes come with some graphs available by default, and there are additional graphs available when you enable the free **SC-Metrics Agent**.
-    <Warning>If you choose to uninstall the **SC-Metrics Agent** on your computes we will not be able to collect the metrics from your compute and hence your monitoring graphs will be empty</Warning>
+### SSH Access
 
-
-    <Frame>
-     <img src="/images/computes/compute-overview.png" style={{ borderRadius: '0.2rem' }} />
-    </Frame>
-
-    To view a Compute’s graphs, click its name on the dashboard. You arrive directly on the compute page. By default, five graphs are available for any Compute:
-
-* The **Memory** public chart displays public memory usage in megabits per second. Incoming bandwidth is dark purple and outgoing bandwidth is light purple.
-* The **CPU usage** shows the percent of total processing power being used, with light blue for user jobs and dark blue for system processes.
-* The **Disk I/O** displays disk read and write operations in megabytes per second, with read operations in dark green and write operations in light green.*
-* The **Network** chart displays the traffic amount both in and out of the compute (packets).
-* The **Load** chart displays the amount of resources being handled by the server at a certain point in time (measured in MBs.)
-
-## Metrics Agent
-
-The Compute graphs use metrics collected by external tools; they require no additional services on the compute itself. You can enable additional metrics graphs and alerting with the SC-Metrics agent, which is a small utility that runs on the Compute.
-
-You can install the metrics agent automatically when you provision a COmpute or after a Compute has been created.
-
-Once the agent is installed, you’ll ba able to get the metrics recorded from your compute to your compute dashboard.
-
-The Compute graph time frame options are 1 hour,  6 hours, 24 hours, 7 days, 30 days or 90 days. Data resolution is based on number of points, with a fixed number of points per plot. When you mouse over any of the graphs, a line appears on all of them, pinpointing a moment in time. A graph legend appears along with metrics for that specific point in time.
-
-## Access Compute's console
-
-Once the SC Agent is installed (and configured if necessary) which might take up to **5 minutes**, you can access the Compute Console from the Compute Control Panel.
-
-First, click the name of the Compute you want to access to expand its detail window. From the detail page, click the Console button in the left menu.
-
- <Frame>
-     <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
-    </Frame>
-
-## Access Compute via SSH
-
-You can connect to your compute directly using SSH from your local terminal. This provides command-line access to your virtual machine.
-
-### SSH Connection
-
-To connect to your compute via SSH, use the following command with your compute's public IP address:
+Connect directly via SSH from your terminal:
 
 <CodeGroup>
-```bash SSH into your compute
+```bash SSH connection
 ssh root@your-public-ip -p 222
 ```
 </CodeGroup>
 
-Replace `your-public-ip` with your compute's actual public IP address, which you can find on the compute details page.
+Replace `your-public-ip` with your compute's IP address (found on the compute details page).
 
-<Note>
-**Port 222:** Currently, when connecting from most internet providers, you need to specify port 222 using the `-p 222` flag. However, if you're connecting from MTN network, you can connect without specifying the port (using default port 22).
-</Note>
-
-### Example
+**Example:**
 
 <CodeGroup>
-```bash Example SSH connection
+```bash Example
 ssh root@192.0.2.1 -p 222
 ```
 </CodeGroup>
 
-You'll be prompted to enter the root password you set during compute creation.
+<Note>
+**Port 222:** Required for most internet providers. MTN network users can connect without specifying the port (default port 22).
+</Note>
 
 <Warning>
-Make sure you have your root password ready. If you've forgotten it, you can reset it using the console access.
+Have your root password ready. If forgotten, reset it using console access.
 </Warning>
 
-## Turn ON/OFF your compute
- 
- To turn ON/OFF a Compute from the control panel, click on the computes name from the dashboard and once on the compute'c control panel. Once in the details page, you can click the swicth button next to the console button from the left menu.
+  </Accordion>
 
- When you turn off a Droplet from the control panel, we first try a graceful shutdown. If that fails, we do a forced shutdown, which may corrupt data. To ensure data integrity, we recommend shutting down from the command line with poweroff.
-  <Warning>You will still be billed for a turned off Compute. To end billing, destroy the compute instead.</Warning>
+  <Accordion title="Monitoring" icon="chart-line" iconType="solid">
+
+Click on your compute name in the **Computes** tab to access detailed monitoring and management.
 
 <Frame>
-     <img src="/images/computes/turn-on-off.png" style={{ borderRadius: '0.2rem' }} />
-    </Frame>
+  <img src="/images/computes/compute-overview.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
 
-<Note>
-  **Need help?** Contact our [support team](mailto:cloud@strettch.com) or stay tuned at [our site](https://cloud.strettch.com).
-</Note>
+### Available Metrics
+
+Your compute includes five real-time performance graphs:
+
+- **Memory** - Memory usage over time
+- **CPU Usage** - Processing power utilization (user jobs and system processes)
+- **Disk I/O** - Read and write operations in MB/s
+- **Network** - Inbound and outbound traffic (packets)
+- **Load** - Server resource load in MBs
+
+View graphs for: 1 hour, 6 hours, 24 hours, 7 days, 30 days, or 90 days. Hover over any graph to see metrics at specific points in time.
+
+### SC Metrics Agent
+
+The [SC Metrics Agent](/agents/sc-metrics-agent) automatically installs with your compute to collect performance data. Without it, monitoring graphs will be empty.
+
+<Warning>
+If you uninstall the SC Metrics Agent, monitoring data collection will stop and graphs will be unavailable.
+</Warning>
+
+  </Accordion>
+
+  <Accordion title="Compute Management" icon="sliders" iconType="solid">
+
+### Turn ON/OFF
+
+To power your compute on or off:
+1. Click your compute name from the dashboard
+2. Click the switch button next to the Console button
+
+<Frame>
+  <img src="/images/computes/turn-on-off.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+When powering off, we attempt a graceful shutdown first. If that fails, we force shutdown, which may corrupt data. For data integrity, shut down from the command line:
+
+<CodeGroup>
+```bash Graceful shutdown
+poweroff
+```
+</CodeGroup>
+
+<Warning>
+**Billing continues for powered-off computes.** To stop billing, destroy the compute instead.
+</Warning>
+
+  </Accordion>
+</AccordionGroup>
+
+## Need Help?
+
+Contact our [support team](mailto:cloud@strettch.com) or visit [our site](https://cloud.strettch.com).
