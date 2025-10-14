@@ -7,6 +7,11 @@
     "light": "#8982FF",
     "dark": "#4C46B5"
   },
+  "seo": {
+    "metatags": {
+        "og:image": "https://res.cloudinary.com/dawr8i20o/image/upload/v1757404681/strettch-cloud/sc-web-app/logo_xzpltc.svg"
+    }
+},
   "favicon": "/logo.png",
   "navigation": {
     "tabs": [
