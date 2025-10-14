@@ -23,7 +23,7 @@ To install the agent in a single step, download the metrics agent installation s
 
 <CodeGroup>
 ``` command to install the agent
-curl -sSL https://sc.repo.cloud.strettch.dev/install.sh | sudo bash
+curl -sSL https://sc.repo.cloud.strettch.com/metrics/install.sh | sudo bash
 ```
 </CodeGroup>
 
@@ -53,7 +53,7 @@ Alternatively, you can review the script before running it to audit the changes 
 
 To review the script before running it, save the script to **/tmp/install.sh**:
 ```
-curl -sSL https://sc.repo.cloud.strettch.dev/install.sh -o /tmp/install.sh
+curl -sSL https://sc.repo.cloud.strettch.com/metrics/install.sh -o /tmp/install.sh
 ```
 This command produces no output. To confirm the file was downloaded successfully, check that it exists and has content using the following command:
 ```
@@ -128,4 +128,4 @@ If your metrics agent is running, you should see output that includes a line con
 sc-metrics-agent    4675  0.0  0.3 1237180 14712 ?       Ssl  19:14   0:00 /opt//bin/sc-metrics-agent --syslog
 root        4733  0.0  0.0   7156  2144 pts/0    S+   19:15   0:00 grep --color=auto sc-metrics-agent
 ```
-If the service is not running or these commands return no output, contact [Strettch Cloud support](mailto:contact@strettch.com) for help troubleshooting the installation.
+If the service is not running or these commands return no output, contact [Strettch Cloud support](mailto:cloud@strettch.com) for help troubleshooting the installation.
