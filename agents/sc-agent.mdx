@@ -1,0 +1,241 @@
+---
+title: "SC Agent"
+description: "Browser-based console access for your virtual machines"
+---
+
+The SC Agent is a lightweight, open-source utility that enables web-based console access to your VMs directly from the Strettch Cloud dashboard. It also provides password reset and SSH management capabilities.
+
+**Supported Systems:** Ubuntu 20.04+, Debian 8+
+
+View the [source code on GitHub](https://github.com/strettch/sc-console-agent)
+
+## Automatic Installation
+
+The SC Agent installs automatically when you create a new compute instance. No action needed—just wait a few minutes after creation, then access your console from the dashboard.
+
+## Manual Installation
+
+Need to install the agent on an existing instance? Here's how:
+
+### Quick Install (Recommended)
+
+Run this single command to install the agent:
+
+<CodeGroup>
+```bash Install the agent
+curl -sSL https://repo.cloud.strettch.com/console/install.sh | sudo bash
+```
+</CodeGroup>
+
+The script will automatically detect your OS, set up repositories, and install the agent:
+
+```
+--- Installing sc-console-agent for noble ---
+-> Cleaning up old repository configurations...
+   -> Updating package lists
+   -> Installing prerequisites
+   -> Downloading GPG key
+   -> Adding repository
+   -> Updating package index
+   -> Installing sc-console-agent
+...
+Setting up sc-console-agent (0.1.12) ...
+Configuring SC-Agent...
+ℹ️  Creating required directories...
+ℹ️  Downloading latest agent configuration...
+✅ Agent configuration downloaded successfully
+ℹ️  Enabling sc-console-agent.service...
+✅ sc-console-agent.service enabled
+ℹ️  Starting services...
+✅ sc-console-agent.service started successfully
+
+╔════════════════════════════════════╗
+║ SC-Console-Agent Installation Done ║
+╚════════════════════════════════════╝
+
+Service Status:
+  • Main Service: active
+  • Auto-Update:  active
+
+✅ sc-console-agent installed successfully!
+```
+
+### Review Before Installing
+
+Prefer to inspect the script first? Download and review it:
+
+<CodeGroup>
+```bash Review the install script
+curl -sSL https://repo.cloud.strettch.com/console/install.sh
+```
+</CodeGroup>
+
+### Verify Installation
+
+Check that the agent is running:
+
+<CodeGroup>
+```bash Check agent status
+systemctl status sc-console-agent
+```
+</CodeGroup>
+
+You should see `Active: active (running)`:
+
+```
+● sc-console-agent.service - SC Console Agent - Secure VM console access management
+     Loaded: loaded (/etc/systemd/system/sc-console-agent.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-10-14 10:12:20 UTC; 38s ago
+       Docs: https://docs.cloud.strettch.com/agents/sc-console-agent
+   Main PID: 578570 (sc-console-agen)
+      Tasks: 8 (limit: 9435)
+     Memory: 1.9M (peak: 2.4M)
+        CPU: 41ms
+     CGroup: /system.slice/sc-console-agent.service
+             └─578570 /usr/bin/sc-console-agent
+```
+
+Access your console from the dashboard within a few minutes.
+
+To check the installed agent version:
+
+<CodeGroup>
+```bash Check version
+dpkg -l | grep sc-console-agent
+```
+</CodeGroup>
+
+## Managing the Agent
+
+### Basic Commands
+
+<CodeGroup>
+```bash Start the agent
+sudo systemctl start sc-console-agent
+```
+
+```bash Stop the agent
+sudo systemctl stop sc-console-agent
+```
+
+```bash Restart the agent
+sudo systemctl restart sc-console-agent
+```
+
+```bash Check status
+systemctl status sc-console-agent
+```
+</CodeGroup>
+
+### Auto-Start on Boot
+
+<CodeGroup>
+```bash Enable auto-start
+sudo systemctl enable sc-console-agent
+```
+
+```bash Disable auto-start
+sudo systemctl disable sc-console-agent
+```
+</CodeGroup>
+
+## Viewing Logs
+
+<CodeGroup>
+```bash Live logs
+sudo journalctl -u sc-console-agent -f
+```
+
+```bash Last hour
+sudo journalctl -u sc-console-agent --since=1h
+```
+
+```bash Last 100 lines
+sudo journalctl -u sc-console-agent -n 100
+```
+</CodeGroup>
+
+## Updates
+
+The agent updates automatically. You can also trigger updates manually:
+
+<CodeGroup>
+```bash Check for and install updates
+sudo systemctl start sc-console-agent-updater
+```
+
+```bash View update logs
+sudo journalctl -u sc-console-agent-updater -f
+```
+</CodeGroup>
+
+## Uninstalling
+
+To completely remove the agent:
+
+<CodeGroup>
+```bash Uninstall the agent
+sudo apt-get purge sc-console-agent
+```
+</CodeGroup>
+
+The uninstall process will stop all services and remove the agent:
+
+```
+Reading package lists... Done
+Building dependency tree... Done
+The following packages will be REMOVED:
+  sc-console-agent*
+After this operation, 7,449 kB disk space will be freed.
+Do you want to continue? [Y/n] Y
+...
+Removing sc-console-agent (0.1.12) ...
+Removing SC-Agent (keeping configuration)...
+Stopping sc-console-agent-update-scheduler.timer...
+Stopping sc-console-agent.service...
+Disabling sc-console-agent-update-scheduler.timer...
+Disabling sc-console-agent.service...
+SC-Agent removed (configuration preserved in /etc/sc-console-agent)
+Purging configuration files for sc-console-agent (0.1.12) ...
+```
+
+**Note:** After uninstalling, console access and password reset will be unavailable. You'll need to use SSH keys instead.
+
+## Troubleshooting
+
+### Console Not Working?
+
+1. Verify the agent is running:
+   <CodeGroup>
+   ```bash
+   systemctl status sc-console-agent
+   ```
+   </CodeGroup>
+
+2. Check recent logs:
+   <CodeGroup>
+   ```bash
+   sudo journalctl -u sc-console-agent -n 50
+   ```
+   </CodeGroup>
+
+3. Restart the service:
+   <CodeGroup>
+   ```bash
+   sudo systemctl restart sc-console-agent
+   ```
+   </CodeGroup>
+
+4. Ensure firewall allows port 22 (SSH) and port 60500 (UDP)
+
+### Need Help?
+
+Contact support at [cloud@strettch.com](mailto:cloud@strettch.com) with:
+- Output from `systemctl status sc-console-agent`
+- Recent logs: `journalctl -u sc-console-agent -n 100`
+- Your compute instance ID
+- Description of the issue
+
+## Security
+
+The agent uses encrypted communication, cryptographic signatures, and port knocking for secure access. It runs with minimal privileges and updates automatically for security patches.
