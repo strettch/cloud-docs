@@ -61,6 +61,55 @@ description: "Manage domains with ease. Enterprise-grade DNS performance with in
 | **MX**     | example.com   | mail handled by mail.example.com |
 | **CNAME** | blog.example.com | is an alias of wiki.example.com|
 
+## Important Limitation: Subdomain Zones on Strettch Cloud Nameservers
+
+<Warning>
+**What's NOT supported:**
+
+You cannot create a subdomain as an independent DNS zone that uses **Strettch Cloud's nameservers** (ns1.strettch.com, ns2.strettch.com) when the parent domain is also using Strettch Cloud's nameservers.
+
+**Example of what's NOT possible:**
+```
+strettchcloud.com
+ ├─ Nameservers: ns1.strettch.com, ns2.strettch.com ✅
+
+project.strettchcloud.com (as separate zone)
+ └─ Nameservers: ns1.strettch.com, ns2.strettch.com ❌ NOT SUPPORTED
+```
+
+In this scenario, you cannot manage `project.strettchcloud.com` as its own independent domain zone with isolated DNS records within Strettch Cloud.
+
+**What IS supported:**
+
+**Option 1:** Delegate a subdomain to **external DNS providers** using NS records:
+```
+strettchcloud.com
+ ├─ Nameservers: ns1.strettch.com, ns2.strettch.com ✅
+ └─ NS record: project → ns1.vercel-dns.com, ns2.vercel-dns.com
+
+project.strettchcloud.com (managed on Vercel)
+ └─ Nameservers: ns1.vercel-dns.com, ns2.vercel-dns.com ✅ SUPPORTED
+```
+
+**Option 2:** Delegate a subdomain to **Strettch Cloud** when the parent domain is on a different provider:
+```
+strettchcloud.com (managed on Cloudflare)
+ ├─ Nameservers: ns.cloudflare.com, secondary.cloudflare.com ✅
+ └─ NS record: project → ns1.strettch.com, ns2.strettch.com
+
+project.strettchcloud.com (managed on Strettch Cloud)
+ └─ Nameservers: ns1.strettch.com, ns2.strettch.com ✅ SUPPORTED
+```
+
+**What this means for you:**
+
+- ✅ You can add any subdomain records directly in your main domain (e.g., `api.project.strettchcloud.com`)
+- ✅ You can delegate subdomains to external DNS providers like AWS Route 53, Vercel, etc.
+- ✅ You can delegate subdomains TO Strettch Cloud when the parent domain is elsewhere
+- ❌ You cannot create subdomain zones that also use Strettch Cloud's nameservers when the parent is on Strettch Cloud
+
+</Warning>
+
 Now let's go straight to adding our DNS records.
 
  <AccordionGroup>
