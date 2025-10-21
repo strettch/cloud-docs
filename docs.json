@@ -79,6 +79,9 @@
     "light": "/logo/logo-light.png",
     "dark": "/logo/logo-dark.png"
   },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
   "navbar": {
     "links": [
       {
