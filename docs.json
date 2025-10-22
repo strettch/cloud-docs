@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Strettch Cloud",
   "colors": {
    "primary": "#6B63FF",
@@ -16,17 +16,31 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
+        "icon": "book-open",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
               "/getting-started/quickstart"
             ]
           },
           {
-            "group": "Guides",
+            "group": "FAQs",
+            "pages": [
+              "faqs/paying-your-bill",
+              "faqs/invoices"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "icon": "map",
+        "groups": [
+          {
+            "group": "Core Features",
             "pages": [
               "guides/teams",
               "guides/domains",
@@ -43,37 +57,26 @@
         ]
       },
       {
-        "tab": "FAQs",
-        "groups":[
+        "tab": "Changelog",
+        "icon": "clock-rotate-left",
+        "groups": [
           {
-            "group": "Questions",
-            "pages":[
-              "faqs/paying-your-bill",
-              "faqs/invoices"
-            ]
+            "group": "Updates",
+            "pages": ["changelog"]
+          }
+        ]
+      },
+      {
+        "tab": "Support",
+        "icon": "life-ring",
+        "groups": [
+          {
+            "group": "Get Help",
+            "pages": ["support"]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Follow us on Instagram",
-          "href": "https://www.instagram.com/strettchcloud/",
-          "icon": "instagram"
-        },
-        {
-          "anchor": "Follow us on X",
-          "href": "https://x.com/strettchcloud",
-          "icon": "x-twitter"
-        },
-        {
-          "anchor": "Follow us at Linkedin",
-          "href": "https://www.linkedin.com/company/strettch-cloud/",
-          "icon": "linkedin"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/logo-light.png",
@@ -83,12 +86,6 @@
     "options": ["copy", "view", "chatgpt", "claude"]
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:cloud@strettch.com"
-      }
-    ],
     "primary": {
       "type": "button",
       "label": "Try it out",
