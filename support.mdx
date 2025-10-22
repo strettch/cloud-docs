@@ -1,19 +1,25 @@
 ---
 title: 'Support'
-description: 'Get help and support for Strettch Cloud'
+description: 'Get help and support for Strettch Cloud infrastructure and services'
 icon: 'life-ring'
 ---
 
 ## Get Support
 
-We're here to help you succeed with Strettch Cloud. Choose the support channel that best fits your needs.
+Running your infrastructure on Strettch Cloud? We're here to help you build, deploy, and scale with confidence. Get technical assistance for compute instances, DNS configuration, team management, and more.
 
 <CardGroup cols={2}>
   <Card title="Email Support" icon="envelope" href="mailto:cloud@strettch.com">
-    Reach our support team directly for technical assistance and billing inquiries
+    Technical support for compute, DNS, and infrastructure issues
+  </Card>
+  <Card title="WhatsApp" icon="whatsapp" href="https://wa.me/250790877708">
+    Quick support via WhatsApp: +250 790 877 708
   </Card>
   <Card title="GitHub Issues" icon="github" href="https://github.com/strettch/cloud-docs/issues">
-    Report bugs, request features, or contribute to our documentation
+    Report platform bugs, request features, or improve docs
+  </Card>
+  <Card title="Community" icon="comments" href="https://www.linkedin.com/company/strettch-cloud/">
+    Connect with other Strettch Cloud users and our team
   </Card>
 </CardGroup>
 
@@ -26,41 +32,73 @@ We're here to help you succeed with Strettch Cloud. Choose the support channel t
     **Email**: [cloud@strettch.com](mailto:cloud@strettch.com)
 
     **Response Time**:
-    - Standard inquiries: Within 24-48 hours
+    - Critical infrastructure issues: Within 2-4 hours
+    - Standard technical inquiries: Within 24-48 hours
     - Billing questions: Within 24 hours
-    - Critical issues: Priority handling
+    - General questions: Within 48 hours
 
     **Best for**:
-    - Technical support questions
-    - Billing and account management
-    - Feature requests and feedback
-    - Security concerns
+    - Compute instance issues (connectivity, performance, crashes)
+    - DNS configuration and propagation problems
+    - Networking and IP address issues
+    - Team management and access control
+    - Billing, invoices, and account management
+    - Security concerns and incidents
+    - SC Agent and Metrics troubleshooting
+  </Accordion>
+
+  <Accordion title="WhatsApp Support" icon="whatsapp">
+    **WhatsApp**: [+250 790 877 708](https://wa.me/250790877708)
+
+    **Response Time**:
+    - Available during business hours (EAT timezone)
+    - Quick responses for urgent infrastructure issues
+    - Standard inquiries: Within 4-8 hours
+
+    **Best for**:
+    - Urgent technical issues (instance down, DNS outage)
+    - Quick questions about platform features
+    - Real-time troubleshooting assistance
+    - Follow-up on existing support tickets
+
+    <Note>
+      For non-urgent issues or detailed technical problems, email support is recommended as it allows us to provide more comprehensive assistance with logs and screenshots.
+    </Note>
   </Accordion>
 
   <Accordion title="GitHub" icon="github">
     **Repository**: [strettch/cloud-docs](https://github.com/strettch/cloud-docs/issues)
 
     **Use for**:
-    - Bug reports
-    - Feature requests
-    - Documentation improvements
+    - Platform bugs and errors
+    - Feature requests (new services, improvements)
+    - Documentation improvements and corrections
     - Open source contributions
+    - API issues and feedback
 
     **Guidelines**:
     - Search existing issues before creating new ones
     - Provide detailed reproduction steps for bugs
+    - Include instance IDs, region, and configuration details
     - Use issue templates when available
+    - Tag issues appropriately (bug, feature, docs)
   </Accordion>
 
-  <Accordion title="Social Media" icon="share-nodes">
+  <Accordion title="Community & Social" icon="share-nodes">
     **Connect with us**:
-    - [LinkedIn](https://www.linkedin.com/company/strettch-cloud/) - Product updates and company news
-    - [X (Twitter)](https://x.com/strettchcloud) - Quick updates and announcements
-    - [Instagram](https://www.instagram.com/strettchcloud/) - Behind the scenes and community
+    - [LinkedIn](https://www.linkedin.com/company/strettch-cloud/) - Product updates, case studies, and company news
+    - [X (Twitter)](https://x.com/strettchcloud) - Platform status, quick updates, and announcements
+    - [Instagram](https://www.instagram.com/strettchcloud/) - Behind the scenes, team, and community highlights
 
-    <Note>
-      For technical support, please use email or GitHub. Social media is best for general inquiries and updates.
-    </Note>
+    **Best for**:
+    - Staying updated on new features and releases
+    - Platform status and maintenance updates
+    - Community discussions and networking
+    - General questions and feedback
+
+    <Warning>
+      For technical support and infrastructure issues, please use email, WhatsApp, or GitHub. Social media channels are monitored but not suitable for time-sensitive support requests.
+    </Warning>
   </Accordion>
 </AccordionGroup>
 
@@ -68,56 +106,77 @@ We're here to help you succeed with Strettch Cloud. Choose the support channel t
 
 ## Before You Contact Support
 
-To help us assist you more effectively, please:
+To help us resolve your infrastructure issues quickly, please gather the following information:
 
-1. **Check the documentation** - Many common questions are answered in our [guides](/guides/teams) and [FAQs](/faqs/paying-your-bill)
-2. **Gather details** - Include error messages, screenshots, and steps to reproduce issues
-3. **Provide context** - Share your account email, project name, or relevant configuration details
-4. **Be specific** - Clear descriptions help us resolve issues faster
+### For Compute Issues:
+- **Instance ID** or instance name
+- **Region** where the instance is deployed
+- **Error messages** or logs from the console
+- **Recent changes** made to the instance (OS updates, configuration changes)
+- **Screenshots** of the issue or error
+- **Time** when the issue started
+
+### For DNS Issues:
+- **Domain name** experiencing the issue
+- **DNS record type** (A, CNAME, MX, TXT, etc.)
+- **Nameserver configuration** at your registrar
+- **Time** since you made the DNS changes
+- **Expected vs actual behavior**
+
+### For Billing or Account Issues:
+- **Account email** address
+- **Team name** (if applicable)
+- **Invoice number** or transaction ID
+- **Description** of the billing question
+
+### General Tips:
+1. **Check documentation first** - Visit [Services](/services) for guides and [FAQs](/faqs) for common questions
+2. **Verify platform status** - Check our social channels for any ongoing incidents
+3. **Try basic troubleshooting** - Restart instance, check network connectivity, verify credentials
+4. **Be specific** - Clear descriptions with technical details help us resolve issues faster
 
 ---
 
 ## Support Guidelines
 
-### What to Expect
+### What We Support
 
-✅ **We will**:
-- Respond to inquiries in a timely manner
-- Provide technical assistance and troubleshooting
-- Help resolve billing and account issues
-- Consider feature requests and feedback
-- Maintain professional and respectful communication
+✅ **Infrastructure Support**:
+- Compute instance troubleshooting (connectivity, performance, startup issues)
+- DNS configuration and propagation assistance
+- Network configuration (IPs, firewall rules)
+- SC Agent and SC Metrics installation and troubleshooting
+- Platform feature guidance and best practices
+- Billing inquiries and invoice questions
+- Account and team management issues
+- Security incident response and guidance
 
-❌ **We cannot**:
-- Provide custom development services
-- Guarantee specific feature implementations
-- Offer 24/7 immediate support (except for critical issues)
-- Assist with third-party integrations outside our scope
+✅ **We Will**:
+- Respond to critical infrastructure issues within 2-4 hours
+- Investigate platform bugs and performance issues
+- Provide technical guidance on using Strettch Cloud services
+- Help optimize your infrastructure setup
+- Consider feature requests and platform improvements
+- Keep you updated on maintenance and platform changes
+
+❌ **Out of Scope**:
+- Application-level debugging (your code, frameworks, or dependencies)
+- Third-party software configuration (databases, web servers, applications)
+- Custom development or scripting services
+- Server administration tasks (OS configuration, software installation)
+- Security hardening beyond Strettch Cloud platform level
+- Data recovery from deleted instances or lost data
 
 ### Your Responsibilities
 
-To receive the best support experience:
+To receive efficient cloud infrastructure support:
 
-- **Provide detailed information** - Include error messages, logs, and reproduction steps
-- **Cooperate with our team** - Respond to follow-up questions and testing requests
-- **Use self-service resources** - Check documentation and FAQs first
-- **Maintain respectful communication** - We're here to help you succeed
-
----
-
-## Enterprise Support
-
-Need dedicated support for your organization?
-
-<Card title="Contact Sales" icon="handshake" href="mailto:cloud@strettch.com?subject=Enterprise%20Support%20Inquiry">
-  Learn about our enterprise support options including:
-  - Dedicated support channels
-  - Faster response times
-  - Custom SLAs
-  - Priority feature requests
-</Card>
-
----
+- **Provide technical details** - Include instance IDs, region, IP addresses, error logs
+- **Share configuration** - DNS records, network settings, recent changes made
+- **Respond promptly** - Answer follow-up questions and provide requested information
+- **Maintain backups** - We cannot recover data from deleted resources
+- **Use documentation** - Check [Services](/services) guides before contacting support
+- **Be respectful** - Professional communication helps us help you better
 
 <Note>
   **Policy Updates**: We reserve the right to modify our support policies and terms at any time. Material changes will be communicated via email or platform announcements.
