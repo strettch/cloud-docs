@@ -23,6 +23,8 @@
             "group": "Getting Started",
             "pages": [
               "index",
+              "overview",
+              "core-concepts",
               "/getting-started/quickstart"
             ]
           },
