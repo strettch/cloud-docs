@@ -58,7 +58,11 @@ If any team member uses a team resource to commit a violation (for example, ille
 
 **Problem**: When am I charged for my cloud resources?
 
-Strettch Cloud uses a **pay-as-you-go** billing model not pay-per-use. Understanding how this works helps you predict and control costs.
+Strettch Cloud uses a **pay-as-you-go** billing model. Understanding how this works helps you predict and control costs.
+
+### Pay-as-you-go vs Pay-per-use
+
+Strettch Cloud uses **pay-as-you-go**, not pay-per-use. Here's the comparison:
 
 | Billing Model | How It Works | Used by Us? |
 |---------------|--------------|-------------|
@@ -77,52 +81,16 @@ You pay 240 RWF regardless of whether the instance processes workloads all day o
 </Tip>
 
 <Warning>
-Stopping a compute instance does not stop billing. To stop incurring charges, you must destroy the resource. See "Resource Lifecycle" below for details on resource states.
+Stopping a compute instance does not stop billing. To stop incurring charges, you must destroy the resource. See [Resource Lifecycle in SC Compute Overview](/services/compute/overview#resource-lifecycle) for details on resource states.
 </Warning>
-
----
-
-## Resource Lifecycle
-
-**Problem**: What states can my resources be in, and what do they mean for access and billing?
-
-Different resource types may have different lifecycles. This section focuses primarily on **compute instances** as the most common example.
-
-### Lifecycle States
-
-Here's the typical flow through lifecycle states:
-```
-Creating → Running ⟷ Stopped → Destroying → Destroyed
-```
-
-| State | Description | Web Dashboard | Resource Access (SSH/Console) | Billable? | Can Transition To |
-|-------|-------------|---------------|-------------------------------|-----------|-------------------|
-| **Creating** | Initial provisioning when first created | Visible | Not accessible | No* | Running |
-| **Running** | Normal operational state | Visible | Fully accessible | **Yes** | Stopped, Destroying |
-| **Stopped** | Instance stopped but resources reserved | Visible | Not accessible | **Yes** | Starting, Destroying |
-| **Starting/Rebooting** | Transitioning from Stopped or rebooting | Visible | Not accessible | **Yes** | Running |
-| **Destroying** | Brief destruction process (seconds) | Visible | Not accessible | No* | Destroyed |
-| **Destroyed** | Final state - all data permanently deleted | Not visible | Not accessible | **No** | None (irreversible) |
-
-<Info>
-*Creating and Destroying states are not billable due to their very brief duration (typically less than 1 minute).
-</Info>
-
-<Warning>
-The **Stopped** state still incurs charges because resources remain reserved. To stop billing, you must **Destroy** the resource.
-</Warning>
-
-### Lifecycle for Other Resources
-
-DNS zones and other resources may have different lifecycle states. Refer to the specific resource documentation for details.
 
 ---
 
 ## Next Steps
 
-Now that you understand how teams, billing, and resource lifecycles work:
+Now that you understand how teams and billing work:
 
 - [Create your first compute instance](/getting-started/quickstart)
-- [Learn about team management](/teams/overview)
-- [Explore DNS zones](/dns/overview)
-- [Review billing and usage](/billing/overview)
+- [Learn about SC Compute and resource lifecycles](/services/compute/overview)
+- [Manage your team](/guides/teams)
+- [Set up DNS for your domains](/guides/domains)

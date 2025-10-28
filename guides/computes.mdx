@@ -1,107 +1,241 @@
 ---
-title: "Computes"
-description: "Spin up, resize, or destroy cloud instances with a few clicks or via API. Built for scale — managed for performance."
+title: "Managing Compute Instances"
+description: "Create, connect to, and manage your SC Compute instances with confidence"
+sidebarTitle: "Managing Instances"
 ---
 
-<AccordionGroup>
-  <Accordion title="Create Compute" icon="rocket" iconType="solid">
+## Creating Your First Compute Instance
 
-Navigate to the **Computes** tab and click **New Compute**. You'll need to configure the following:
+**Problem**: How do I provision a new server with the right specifications for my application?
 
-### 1. Choose Location
+**Why it matters**: Choosing the correct configuration upfront prevents performance issues and unnecessary costs later.
 
-Select a hosting location for your server. This affects network speed and latency for optimal performance.
+Navigate to the **Computes** tab and click **New Compute** to begin. You'll configure your instance through six steps:
 
-### 2. Choose Image
+<Steps>
+  <Step title="Choose Location">
+    Select a hosting location for your server.
 
-Select an operating system image for your compute.
+    The location you choose affects network latency and performance for your users. Select a location closest to where your primary traffic originates.
+  </Step>
+
+  <Step title="Choose Image">
+    Select an operating system image for your compute.
+
+    <Frame>
+      <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+    Available images include popular Linux distributions. Choose based on your application requirements and team familiarity.
+  </Step>
+
+  <Step title="Choose Type and Specifications">
+    Select your compute configuration: `shared` or `dedicated` CPU.
+
+    <Frame>
+      <img src="/images/computes/choose-type.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+    **Shared CPU**: Cost-effective for applications with variable load patterns
+
+    **Dedicated CPU**: Consistent performance for production workloads
+
+    After choosing the type, specify your compute specs: **CPU**, **RAM**, **Storage**. Pricing is displayed alongside each configuration so you can see costs in real-time.
+  </Step>
+
+  <Step title="Set Root Password">
+    Create a secure password for root user access.
+
+    <Warning>
+    Store your password securely using a password manager. You will not receive an email with your compute details or password. If you lose this password, you'll need to reset it through console access.
+    </Warning>
+  </Step>
+
+  <Step title="Configure Name and Tags">
+    **Compute Name**: Give your compute an identifiable name that describes its purpose (e.g., "api-production", "staging-web-server")
+
+    **Add Tags (Optional)**: Organize and manage your computes with custom tags. Useful for filtering, cost allocation, or automation.
+  </Step>
+
+  <Step title="Review and Create">
+    Review your configuration and pricing, then click **Create Compute**.
+
+    <Frame>
+      <img src="/images/computes/create-compute.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+    <Note>
+    Your compute cost depends on the specs you selected. The price is shown during configuration. Ensure you have sufficient credits in your account to create the compute.
+    </Note>
+
+    Your compute will be provisioned within seconds. Once in the **Running** state, you can connect and start using it.
+  </Step>
+</Steps>
+
+---
+
+## Connecting to Your Compute Instance
+
+**Problem**: How do I access my compute instance to install applications and manage services?
+
+### Using the Web Console
+
+Access your compute through a browser-based console without needing any SSH client software.
+
+<Steps>
+  <Step title="Navigate to Console">
+    Click your compute name from the dashboard, then click **Console** in the left menu.
+
+    <Frame>
+      <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+  </Step>
+
+  <Step title="Wait for SC Agent Installation">
+    The [SC Agent](/agents/sc-agent) is automatically installed on your compute. It will be ready within **less than 3 minutes** of compute creation.
+
+    The SC Agent enables browser-based console access. You can start using the console as soon as the agent installation completes.
+  </Step>
+
+  <Step title="Access Your Terminal">
+    Once the console loads, you'll have a full terminal interface to your compute. Enter your root password to log in.
+  </Step>
+</Steps>
+
+### Using SSH Access
+
+Connect directly via SSH from your local terminal for a native command-line experience.
+
+<Steps>
+  <Step title="Find Your Compute IP Address">
+    Locate your compute's public IP address on the compute details page in the dashboard.
+  </Step>
+
+  <Step title="Connect via SSH">
+    Open your terminal and connect using this command:
+
+    ```bash SSH connection
+    ssh root@your-public-ip -p 222
+    ```
+
+    Replace `your-public-ip` with your actual compute IP address.
+
+    **Example:**
+    ```bash Example
+    ssh root@192.0.2.1 -p 222
+    ```
+
+    <Note>
+    **Port 222**: Required for most internet providers. MTN network users can connect without specifying the port (default port 22).
+    </Note>
+  </Step>
+
+  <Step title="Enter Your Password">
+    When prompted, enter the root password you created during compute setup.
+
+    <Warning>
+    If you've forgotten your root password, reset it using console access through the web dashboard.
+    </Warning>
+  </Step>
+</Steps>
+
+---
+
+## Understanding Networking
+
+**Problem**: How do I make my compute instance accessible from the internet, and when should I use public vs private networking?
+
+**Why it matters**: Proper network architecture significantly improves security by limiting attack surface and helps reduce costs by only paying for public IPs where needed.
+
+### Public IP Addresses (Optional)
+
+By default, compute instances are **not** assigned a public IP address. They remain in a private network, inaccessible from the internet but able to communicate with other instances in your team.
+
+#### When You Need a Public IP
+
+You need a public IP address when your instance must:
+- **Receive incoming connections** from the internet (web servers, APIs, public-facing services)
+- **Be accessed via SSH** directly from your local machine
+- **Serve as an entry point** to your infrastructure (reverse proxies, load balancers)
+
+#### Cost
+
+Public IP addresses cost **1,000 RWF** and are billed separately from compute resources.
+
+#### How to Attach a Public IP
+
+When creating a compute instance, you'll see an option to attach a public IP:
 
 <Frame>
-  <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
+  <img src="/images/computes/attach-public-ip.png" style={{ borderRadius: "0.2rem" }} />
 </Frame>
 
-### 3. Choose Type
+Simply check the box to attach a public IP to your instance.
 
-Select your compute configuration: `shared` or `dedicated` CPU.
+### Private Network Architecture (Recommended for Security)
 
-<Frame>
-  <img src="/images/computes/choose-type.png" style={{ borderRadius: "0.2rem" }} />
-</Frame>
+**Problem**: How can I improve security while running multiple services?
 
-After choosing the type, specify your compute specs: **CPU**, **RAM**, **Storage**. Pricing is displayed alongside each configuration.
+**Best practice**: Use a single public-facing instance as a gateway, keeping your application servers private.
 
-### 4. Set Root Password
+#### Example Architecture
 
-Create a secure password for root user access.
+Imagine you're running a web application with these components:
 
-<Warning>
-Store your password securely. You will not receive an email with your compute details or password.
-</Warning>
-
-### 5. Compute Name & Tags
-
-- **Compute Name:** Give your compute an identifiable name
-- **Add Tags (Optional):** Organize and manage your computes with custom tags
-
-### 6. Create
-
-Review your configuration and pricing, then click **Create Compute**. You need sufficient credits to create the compute.
-
-<Frame>
-  <img src="/images/computes/create-compute.png" style={{ borderRadius: "0.2rem" }} />
-</Frame>
-
-<Note>
-Your compute cost depends on the specs you selected. The price is shown during configuration.
-</Note>
-
-  </Accordion>
-
-  <Accordion title="Access Compute" icon="terminal" iconType="solid">
-
-### Web Console
-
-Access your compute through a browser-based console. The [SC Agent](/agents/sc-agent) is automatically installed and ready within **5 minutes** of compute creation.
-
-To open the console:
-1. Click your compute name
-2. Click **Console** in the left menu
-
-<Frame>
-  <img src="/images/computes/open-console.png" style={{ borderRadius: '0.2rem' }} />
-</Frame>
-
-### SSH Access
-
-Connect directly via SSH from your terminal:
-
-<CodeGroup>
-```bash SSH connection
-ssh root@your-public-ip -p 222
 ```
-</CodeGroup>
+                    PUBLIC INTERNET
+                          ↑
+                          │ Public IP (1,000 RWF)
+                          │
+    ══════════════════════╪══════════════════════════════
+    ║                     │                            ║
+    ║  PRIVATE NETWORK (Your Team's Internal Network) ║
+    ║                     │                            ║
+    ║             ┌───────┴────────┐                   ║
+    ║             │ Reverse Proxy  │ ← Has Public IP  ║
+    ║             │ (Caddy/Nginx)  │    Public security║
+    ║             └───────┬────────┘    measures here  ║
+    ║                     │                            ║
+    ║         ┌───────────┴───────────┐                ║
+    ║         │                       │                ║
+    ║         ↓                       ↓                ║
+    ║   ┌──────────┐            ┌──────────┐          ║
+    ║   │ Frontend │            │ Backend  │          ║
+    ║   │    VM    │            │    VM    │          ║
+    ║   │(no public│            │(no public│          ║
+    ║   │   IP)    │            │   IP)    │          ║
+    ║   └──────────┘            └────┬─────┘          ║
+    ║                                │                 ║
+    ║                                ↓                 ║
+    ║                          ┌──────────┐            ║
+    ║                          │ Database │            ║
+    ║                          │    VM    │            ║
+    ║                          │(no public│            ║
+    ║                          │   IP)    │            ║
+    ║                          └──────────┘            ║
+    ║                                                   ║
+    ══════════════════════════════════════════════════════
 
-Replace `your-public-ip` with your compute's IP address (found on the compute details page).
-
-**Example:**
-
-<CodeGroup>
-```bash Example
-ssh root@192.0.2.1 -p 222
+Legend:
+• All VMs are in the private network
+• Reverse Proxy: Has a public IP, accessible from internet
+• Frontend, Backend, Database: No public IP, only accessible within private network
+• Database: Only communicates with Backend VM
 ```
-</CodeGroup>
 
-<Note>
-**Port 222:** Required for most internet providers. MTN network users can connect without specifying the port (default port 22).
-</Note>
+**Benefits of this approach:**
+1. **Enhanced Security** - Only one VM is exposed to the internet, reducing attack surface
+2. **Cost Savings** - Pay for only one public IP (1,000 RWF) instead of four (4,000 RWF)
+3. **Centralized Public Security** - Configure internet-facing firewalls, SSL certificates, and security rules in one place
+4. **Simplified Management** - Update public security measures on one VM instead of multiple
 
-<Warning>
-Have your root password ready. If forgotten, reset it using console access.
-</Warning>
+---
 
-  </Accordion>
+## Monitoring Performance and Health
 
-  <Accordion title="Monitoring" icon="chart-line" iconType="solid">
+**Problem**: How do I know if my compute instance is performing well or experiencing issues?
+
+**Why it matters**: Proactive monitoring helps you identify performance bottlenecks, plan capacity upgrades, and troubleshoot issues before they impact users.
 
 Click on your compute name in the **Computes** tab to access detailed monitoring and management.
 
@@ -111,52 +245,139 @@ Click on your compute name in the **Computes** tab to access detailed monitoring
 
 ### Available Metrics
 
-Your compute includes five real-time performance graphs:
+Your compute includes five real-time performance graphs that help you understand resource utilization:
 
-- **Memory** - Memory usage over time
-- **CPU Usage** - Processing power utilization (user jobs and system processes)
-- **Disk I/O** - Read and write operations in MB/s
-- **Network** - Inbound and outbound traffic (packets)
-- **Load** - Server resource load in MBs
+| Metric | What It Shows | What to Watch For |
+|--------|---------------|-------------------|
+| **Memory** | Memory usage over time | Consistently high usage (>90%) indicates you need more RAM |
+| **CPU Usage** | Processing power utilization (user jobs and system processes) | Sustained high CPU (>80%) suggests you need more CPU cores |
+| **Disk I/O** | Read and write operations in MB/s | High I/O wait times can slow down applications |
+| **Network** | Inbound and outbound traffic (packets) | Unexpected spikes may indicate traffic anomalies |
+| **Load** | Server resource load in MBs | Load higher than CPU count suggests resource contention |
 
-View graphs for: 1 hour, 6 hours, 24 hours, 7 days, 30 days, or 90 days. Hover over any graph to see metrics at specific points in time.
+### Time Range Options
+
+View graphs for different time periods to understand short-term issues or long-term trends:
+
+- **1 hour** - Real-time troubleshooting
+- **6 hours** - Recent performance patterns
+- **24 hours** - Daily usage cycles
+- **7 days** - Weekly trends
+- **30 days** - Monthly patterns and capacity planning
+
+Hover over any graph to see exact metrics at specific points in time.
 
 ### SC Metrics Agent
 
-The [SC Metrics Agent](/agents/sc-metrics-agent) automatically installs with your compute to collect performance data. Without it, monitoring graphs will be empty.
+The [SC Metrics Agent](/agents/sc-metrics-agent) automatically installs with your compute to collect performance data. This agent runs in the background and sends metrics to the dashboard for visualization.
 
 <Warning>
-If you uninstall the SC Metrics Agent, monitoring data collection will stop and graphs will be unavailable.
+If you uninstall the SC Metrics Agent, monitoring data collection will stop and graphs will be unavailable. Only remove this agent if you're using alternative monitoring solutions.
 </Warning>
 
-  </Accordion>
+---
 
-  <Accordion title="Compute Management" icon="sliders" iconType="solid">
+## Managing Compute Power States
 
-### Turn ON/OFF
+**Problem**: How do I control when my compute instance is running or stopped?
 
-To power your compute on or off:
-1. Click your compute name from the dashboard
-2. Click the switch button next to the Console button
+### Turning Your Compute ON or OFF
 
-<Frame>
-  <img src="/images/computes/turn-on-off.png" style={{ borderRadius: '0.2rem' }} />
-</Frame>
+<Steps>
+  <Step title="Navigate to Compute Details">
+    Click your compute name from the dashboard.
+  </Step>
 
-When powering off, we attempt a graceful shutdown first. If that fails, we force shutdown, which may corrupt data. For data integrity, shut down from the command line:
+  <Step title="Use the Power Switch">
+    Click the switch button next to the Console button.
 
-<CodeGroup>
+    <Frame>
+      <img src="/images/computes/turn-on-off.png" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+    The system will attempt a graceful shutdown first. If that fails, it will force shutdown.
+  </Step>
+</Steps>
+
+### Graceful Shutdown from Command Line
+
+For maximum data integrity, shut down from within your compute instance:
+
 ```bash Graceful shutdown
 poweroff
 ```
-</CodeGroup>
+
+This ensures all running processes close properly and data is written to disk before shutdown.
 
 <Warning>
-**Billing continues for powered-off computes.** To stop billing, destroy the compute instead.
+**Billing continues for powered-off computes.** Stopped instances still reserve resources (CPU, RAM, storage) and incur charges at the same rate. To stop billing completely, you must destroy the compute instance.
 </Warning>
 
-  </Accordion>
-</AccordionGroup>
+---
+
+## Best Practices
+
+**Problem**: How do I ensure my compute instances are secure, performant, and cost-effective?
+
+**Why it matters**: Following best practices prevents security breaches, performance issues, and unexpected costs.
+
+### Security
+
+**Use SSH Keys Instead of Passwords**
+- SSH keys are more secure than password authentication
+- Generate a key pair locally and add your public key to `~/.ssh/authorized_keys`
+- Disable password authentication in `/etc/ssh/sshd_config`
+
+**Keep Your System Updated**
+- Regularly update your operating system and packages
+- Run `apt update && apt upgrade` (Ubuntu/Debian) or equivalent for your OS
+- Subscribe to security mailing lists for your distribution
+
+**Configure a Firewall**
+- Use `ufw` (Uncomplicated Firewall) or `iptables` to restrict access
+- Only open ports that your applications actually need
+- Consider using port 222 for SSH (as configured) to avoid automated scanners
+
+**Limit Root Access**
+- Create a non-root user for daily operations
+- Use `sudo` for administrative tasks
+- Only use root when absolutely necessary
+
+### Performance
+
+**Monitor Resource Usage**
+- Check your monitoring graphs regularly
+- Set up alerts for sustained high CPU or memory usage
+- Plan upgrades before hitting resource limits
+
+**Choose the Right Instance Type**
+- Use shared CPU for development and staging
+- Use dedicated CPU for production workloads
+- Start small and scale up based on actual usage
+
+**Optimize Application Performance**
+- Profile your applications to find bottlenecks
+- Use caching where appropriate (Redis, Memcached)
+- Optimize database queries and indexes
+
+### Cost Management
+
+**Right-Size Your Instances**
+- Don't over-provision resources "just in case"
+- Review metrics after a few weeks and adjust specifications
+- Scale up only when metrics consistently show resource constraints
+
+**Destroy Unused Instances**
+- Delete development or testing instances when not in use
+- Remember: stopped instances still incur charges
+- Use tags to identify instances that can be safely destroyed
+
+**Plan for Growth**
+- Monitor usage trends over 30-90 days
+- Anticipate capacity needs before hitting limits
+- Consider reserved instances for long-running workloads (if available)
+
+---
 
 ## Need Help?
 
