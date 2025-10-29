@@ -29,7 +29,7 @@ When you create your first account, Strettch Cloud automatically creates a defau
 
 - **Resources belong directly to teams**: There is no intermediate project layer. When you create a compute instance or DNS zone, it belongs to the team.
 - **Users can join multiple teams**: You can be a member of several teams simultaneously, each with its own resources and billing.
-- **Teams have roles**: Teams include roles like owner and member to control who can manage resources. See the Teams documentation for details on permissions.
+- **Teams have roles**: Teams include roles (owner, admin, member, viewer) to control who can manage resources. See the Teams documentation for details on permissions.
 - **Teams are isolated**: Teams cannot share resources or billing with each other. Each team operates independently.
 
 <Warning>
@@ -58,12 +58,12 @@ Strettch Cloud uses **pay-as-you-go**, not pay-per-use. Here's the comparison:
 <Tip>
 **Billing Example**
 
-A compute instance costs **10 RWF per hour**. If you reserve this instance for 24 hours:
+A compute instance costs **10 RWF per hour**. If you reserve this instance for 24 hours (one day):
 ```
-10 RWF/hour × 24 hours = 240 RWF total
+10 RWF/hour × 24 hours = 240 RWF per day
 ```
 
-You pay 240 RWF regardless of whether the instance processes workloads all day or sits idle.
+You pay 240 RWF for that day regardless of whether the instance processes workloads all day or sits idle. Your monthly bill accumulates these daily charges throughout the billing cycle.
 </Tip>
 
 <Warning>

@@ -5,7 +5,7 @@ description: "Deploy your first cloud instance on African infrastructure in 5 mi
 
 ## Getting Your First Instance Running
 
-This guide walks you through creating a Strettch Cloud account and deploying your first compute instance. You will have a running virtual machine accessible via web console and SSH in about less than 3 minutes.
+This guide walks you through creating a Strettch Cloud account and deploying your first compute instance. You will have a running virtual machine accessible via web console and SSH in less than 5 minutes.
 
 By the end of this guide, you will have:
 - A verified Strettch Cloud account
@@ -157,7 +157,7 @@ ssh root@41.74.168.123 -p 222
 When prompted, enter the root password you created during setup.
 
 <Note>
-**Port 222:** Strettch Cloud uses port 222 instead of the default port 22 due to firewall block from our upstream internet provider.
+**Port 222:** Strettch Cloud uses port 222 instead of the default port 22 for SSH access due to a firewall restriction from our upstream internet provider. This applies to most connections. However, if you are connecting from within certain networks (such as MTN in Rwanda), you may be able to connect using the default port 22 without specifying `-p 222`.
 </Note>
 
 <Warning>
