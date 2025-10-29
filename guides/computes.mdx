@@ -189,16 +189,20 @@ Imagine you're running a web application with these components:
   <img className="hidden dark:block" src="/images/computes/public-private-internet-archtecture-dark.jpg" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-**Legend:**
-- All VMs start in the private network by default
-- Reverse Proxy: Has a public IP attached, making it accessible from the internet
-- Frontend, Backend, Database: No public IP, only accessible within the private network
+**How this architecture works:**
+
+**Private Network (Foundation)**
+- All computes exist in a secure private network where they can communicate with each other
+
+**Public IP Assignment (Optional)**
+- **Reverse Proxy**: Has a public IP attached, making it accessible from the internet and able to route traffic to private services
+- **Frontend, Backend, Database**: No public IPs attached, so they remain inaccessible from the internet but can communicate within the private network
 
 **Benefits of this approach:**
-1. **Enhanced Security** - Only one VM is exposed to the internet, reducing attack surface
+1. **Enhanced Security** - Only one compute is exposed to the internet, reducing attack surface
 2. **Cost Savings** - Pay for only one public IP instead of multiple (public IPs are billed separately)
 3. **Centralized Public Security** - Configure internet-facing firewalls, SSL certificates, and security rules in one place
-4. **Simplified Management** - Update public security measures on one VM instead of multiple
+4. **Simplified Management** - Update public security measures on one compute instead of multiple
 
 ---
 
