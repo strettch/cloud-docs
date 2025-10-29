@@ -1,0 +1,173 @@
+📘 GETTING STARTED
+│
+├─ Overview ✅
+│  ├─ What is Strettch Cloud?
+│  ├─ Why Strettch? (Africa-first, sovereignty, local billing)
+│  ├─ Core capabilities (Compute, DNS, Teams)
+│  └─ Supported regions & currencies
+│
+├─ Quickstart ✅
+│  ├─ Sign up & verify account
+│  ├─ Create your first compute instance (5-min guide)
+│  ├─ Connect via SSH
+│  └─ Next steps (point domain, invite team)
+│
+└─ Core Concepts ✅
+   ├─ Teams
+   │  └─ [DIAGRAM: Team → Projects → Resources hierarchy]
+   ├─ Billing Model
+   │  └─ Pay-as-you-go, resource-based pricing
+   └─ Resource Lifecycle
+      └─ Create → Running → Stopped → Destroyed
+
+📦 Services
+│
+├─ SC Compute
+│  ├─ Overview
+│  │  ├─ What is sc Compute?
+│  │  ├─ Use cases (web apps, APIs, databases)
+│  │  └─ Instance lifecycle states
+│  │
+│  ├─ Getting Started with Compute
+│  │  ├─ Create your first instance
+│  │  ├─ Choose instance specification
+│  │  ├─ Select operating system
+│  │  ├─ Configure networking
+│  │  └─ Launch & connect
+│  │
+│  ├─ Managing Instances
+│  │  ├─ Start, stop, reboot, destroy
+│  │  ├─ View instance details
+│  │  └─ Instance console access
+│  │
+│  ├─ Connecting to Instances
+│  │  ├─ SSH connection guide
+│  │  ├─ Using Web console (Via SC Agent)
+│  │  └─ Troubleshooting connection issues
+│  │
+│  ├─ Networking
+│  │  ├─ Public vs private IPs
+│  │
+│  │
+│  └─ Best Practices
+│     ├─ Security hardening
+│     ├─ Performance optimization
+│     └─ Cost management tips
+│
+├─ DNS
+│  ├─ Overview
+│  │  ├─ What is  DNS?
+│  │  ├─ DNS basics
+│  │  └─ Use cases
+│  │
+│  ├─ Getting Started with DNS
+│  │  ├─ Add your first domain
+│  │  ├─ Update nameservers at registrar
+│  │  ├─ Verify domain ownership
+│  │  └─ Create your first DNS record
+│  │
+│  ├─ Managing Domains
+│  │  ├─ Add/remove domains
+│  │  ├─ Domain verification status
+│  │  └─ Domain transfer considerations
+│  │
+│  ├─ DNS Records
+│  │  ├─ A Records (point to IPv4)
+│  │  ├─ AAAA Records (point to IPv6)
+│  │  ├─ CNAME Records (aliases)
+│  │  ├─ MX Records (email routing)
+│  │  ├─ TXT Records (verification, SPF, DKIM)
+│  │  └─ NS Records (nameservers)
+│  │
+│  ├─ Common Workflows
+│  │  ├─ Point domain to compute instance
+│  │  │  └─ [DIAGRAM: Domain → DNS → A Record → Compute IP]
+│  │  ├─ Set up subdomain (www, api, blog)
+│  │  ├─ Configure custom email (MX records)
+│  │  └─ SSL/TLS with Let's Encrypt
+│  │
+│  └─ Best Practices
+│     ├─ TTL configuration guidelines
+│     ├─ DNS propagation expectations
+│     └─ Avoiding common mistakes
+│
+└─ Teams
+   ├─ Overview
+   │  ├─ What are Teams?
+   │  ├─ Team-based resource organization
+   │  └─ Billing per team
+   │
+   ├─ Roles & Permissions
+   │  ├─ Owner (full control)
+   │  ├─ Admin (manage resources & members)
+   │  ├─ Member (create/manage resources)
+   │  └─ Viewer (read-only access)
+   │  └─ [TABLE: Permission matrix]
+
+
+🔧 AGENTS & TOOLS
+│
+├─ SC Agent (Web Console)
+│  ├─ What is SC Agent?
+│  ├─ Installation on compute instances
+│  │  ├─ Ubuntu installation
+│  │  └─ Verify installation
+│  ├─ Accessing web console
+│  ├─ Using the console interface
+│  ├─ Security considerations
+│  └─ Troubleshooting
+│
+└─ SC Metrics Agent
+   ├─ What is SC Metrics Agent?
+   ├─ Installation & setup
+   │  ├─ Ubuntu installation
+   │  └─ Configuration options
+   ├─ Metrics collected
+   │  ├─ CPU usage
+   │  ├─ Memory usage
+   │  ├─ Disk I/O
+   │  └─ Network traffic
+   ├─ Viewing metrics dashboard
+   ├─ [DIAGRAM: Compute → Agent → Metrics → Dashboard flow]
+   └─ Troubleshooting
+
+📚 REFERENCE
+│
+├─ Compute Specifications
+│  ├─ Instance types table
+│  │  └─ [TABLE: Name | CPU | RAM | Disk | Price/hour | Price/month]
+│  ├─ Network specifications
+│  │  ├─ Bandwidth limits per instance
+│  │  ├─ Network latency (typical)
+│  │  └─ Public IP allocation
+
+❓ TROUBLESHOOTING & FAQS
+│
+├─ Compute Troubleshooting
+│  ├─ Can't connect via SSH
+│  ├─ Instance won't start
+│  ├─ Poor performance issues
+│  ├─ Out of disk space
+│  └─ Console not loading
+│
+├─ DNS Troubleshooting
+│  ├─ Nameserver configuration issues
+
+│
+└─ Frequently Asked Questions
+   ├─ General
+   │  ├─ What makes Strettch different?
+   │  ├─ Which regions are available?
+   │  └─ How is data sovereignty ensured?
+   ├─ Compute
+   │  ├─ Can I upgrade instance size?
+   │  ├─ What OS images are supported?
+   │  └─ Do you offer snapshots?
+   ├─ DNS
+   │  ├─ How long does DNS propagation take?
+   │  ├─ Can I use external nameservers?
+   │  └─ Do you support DNSSEC?
+   └─ Billing
+      ├─ How am I charged for stopped instances?
+      ├─ Can I pay in my local currency?
+      └─ What payment methods do you accept?

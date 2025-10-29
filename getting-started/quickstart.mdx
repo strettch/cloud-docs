@@ -1,40 +1,204 @@
 ---
 title: "Quickstart"
-description: "Go from zero to hero in minutes with Strettch Cloud. This guide will help you get started with Strettch Cloud and understand the power of our platform."
+description: "Deploy your first cloud instance on African infrastructure in 5 minutes"
 ---
 
-## Strettch Cloud Services 🚀
-Strettch Cloud has been designed from the ground up to be a developer-friendly platform. The platform is composed of various services that can be used to deploy applications quickly and securely.
+## Getting Your First Instance Running
 
+This guide walks you through creating a Strettch Cloud account and deploying your first compute instance. You will have a running virtual machine accessible via web console and SSH in about less than 3 minutes.
 
-<Card
-    title="Compute management."
-    href="/guides/computes"
->
-    Spin up, resize, or destroy cloud instances with a few clicks or via API. Built for scale — managed for performance 
-    Strettch Cloud offers a strategic location for your platforms, ensuring low latency and high availability. 
-</Card>
+By the end of this guide, you will have:
+- A verified Strettch Cloud account
+- A running compute instance with public IP
+- Terminal access through both web console and SSH
 
-<Card
-    title="Free & Quick DNS Hosting."
-    href="/guides/domains"
->
-   Manage domains with ease. Enterprise-grade DNS performance with instant propagation.
-    We provide fast DNS propagation, and a Web Application Firewall (WAF) to ensure the best performance and security.
-</Card>
+---
 
-<Card
-    title="Real-Time Monitoring"
-    href="/guides/computes#computes-monitoring"
->
-    Stay on top of your infrastructure with built-in metrics and alerts. No need for third-party tools — it's all included.
-</Card>
+## Step 1: Create Your Account
 
-import SnippetBegin from '/snippets/before-begin.mdx'
+Visit [https://console.cloud.strettch.com/](https://console.cloud.strettch.com/) to begin.
 
-<SnippetBegin/>
+### Choose Your Sign-In Method
 
+Strettch Cloud supports two authentication providers to make team collaboration easier:
+
+<CardGroup cols={2}>
+  <Card title="Sign in with GitHub" icon="github">
+    Use your GitHub account to authenticate
+  </Card>
+  <Card title="Sign in with Google" icon="google">
+    Use your Google account to authenticate
+  </Card>
+</CardGroup>
+
+Click your preferred option to continue.
 
 <Note>
-  **Need help?** Contact our [support team](mailto:cloud@strettch.com) or stay tuned at [our site](https://cloud.strettch.com).
+**Private Beta Access:** Strettch Cloud is currently in private beta. If you have not been added to the waitlist, you will see a "Join Waitlist" button instead of being able to create an account. [Request access here](https://cloud.strettch.com).
 </Note>
+
+### Verify Your Phone Number
+
+After authenticating, you will be prompted to add your phone number. Phone verification serves as a second layer of identification to maintain platform integrity.
+
+1. Enter your phone number in international format (e.g., +250788123456)
+2. Click **Send Verification Code**
+3. Choose where to receive your verification code:
+   - **WhatsApp:** Receive code via WhatsApp message
+   - **SMS:** Receive code via text message
+
+<Note>
+**Non-Rwandan Phone Numbers:** If your phone number does not start with +250, only WhatsApp verification is available. The verification code will be sent automatically to your WhatsApp.
+</Note>
+
+4. Enter the verification code you received
+5. Complete account setup
+
+Your account is now active and ready to use.
+
+---
+
+## Step 2: Create Your First Compute Instance
+
+After account verification, you will be directed to the Computes dashboard.
+
+### Start the Creation Process
+
+Click the **New Compute** button to open the compute creation page.
+
+### Configure Your Instance
+
+You will need to make several configuration choices. Here are the key decisions:
+
+#### 1. Choose Your Operating System
+
+Select the Linux distribution you want to run. Currently, we offer Ubuntu 22 LTS and Ubuntu 24 LTS. Additional distributions (Debian and others) will be available in the coming months.
+
+Both Ubuntu versions are Long Term Support (LTS) releases, making them reliable choices for production applications.
+
+#### 2. Select Instance Specifications
+
+Choose your compute specifications based on your workload:
+
+- **CPU:** Number of processing cores
+- **RAM:** Memory allocation
+- **Storage:** Disk space
+
+Pricing appears next to each configuration option. Costs are shown in Rwandan Francs (RWF).
+
+<Note>
+Start with smaller specifications for testing. You can always create new instances with different specs as your needs grow.
+</Note>
+
+#### 3. Add Public IP Address (Recommended)
+
+Enable the public IP option to make your instance accessible from the internet.
+
+<Warning>
+**Additional Cost:** Public IP addresses are billed separately from compute resources. This is required for SSH access from outside the Strettch Cloud network. Check current pricing in your dashboard.
+</Warning>
+
+Without a public IP, you can only access your instance through the web console or by setting up a VPN.
+
+#### 4. Set Root Password
+
+Create a secure password for the root user account.
+
+<Warning>
+**Save Your Password:** Strettch Cloud does not send password reminders via email. Store your password in a secure location. If you forget it, you can reset it using web console access.
+</Warning>
+
+#### 5. Name Your Instance
+
+Give your compute instance a descriptive name that helps you identify its purpose (e.g., "production-api", "testing-server", "wordpress-site").
+
+### Complete the Creation
+
+Review your configuration and verify you have sufficient account balance. Click **Create Compute** to provision your instance.
+
+<Note>
+**Insufficient Balance:** If you do not have enough credits, you will be prompted to add funds before the instance can be created. See [Paying Your Bill](/faqs/paying-your-bill) for payment options.
+</Note>
+
+Instance creation typically takes 1-2 minutes. You will be redirected to the Computes dashboard where you can monitor the provisioning status.
+
+---
+
+## Step 3: Access Your Instance
+
+Once your instance is running, you have two ways to access it.
+
+### Option 1: Web Console Access
+
+The web console provides browser-based terminal access to your instance. This works for all instances regardless of network configuration.
+
+1. Click on your compute instance name in the dashboard
+2. Click the **Console** button in the left menu
+3. A new browser tab opens with a terminal interface
+
+You will be automatically logged in—no password required. This is handled securely by our agent running on your instance.
+
+The web console is ready to use immediately after your instance is created.
+
+### Option 2: SSH Access
+
+SSH provides direct terminal access from your local computer. This requires a public IP address.
+
+Open your terminal and run this command:
+
+```bash
+ssh root@<your-public-ip> -p 222
+```
+
+Replace `<your-public-ip>` with the IP address shown on your compute details page.
+
+**Example:**
+
+```bash
+ssh root@41.74.168.123 -p 222
+```
+
+When prompted, enter the root password you created during setup.
+
+<Note>
+**Port 222:** Strettch Cloud uses port 222 instead of the default port 22 due to firewall block from our upstream internet provider.
+</Note>
+
+<Warning>
+**VPN Required for Private Instances:** If you did not add a public IP, SSH access requires setting up a VPN connection to the Strettch Cloud network. Use the web console instead for immediate access.
+</Warning>
+
+You now have a running compute instance on African infrastructure with full terminal access.
+
+---
+
+## Next Steps
+
+Your instance is ready for use. Here are recommended next actions:
+
+<CardGroup cols={2}>
+  <Card title="Point Your Domain" icon="globe" href="/guides/domains">
+    Configure DNS records to direct your domain to your new instance
+  </Card>
+  <Card title="Invite Team Members" icon="users" href="/guides/teams">
+    Add collaborators and assign roles for team-based infrastructure management
+  </Card>
+  <Card title="Monitor Performance" icon="chart-line" href="/guides/computes#monitoring">
+    View real-time metrics for CPU, memory, network, and disk usage
+  </Card>
+  <Card title="Learn About Pricing" icon="wallet" href="/faqs/paying-your-bill">
+    Understand billing, payment methods, and how to manage your account balance
+  </Card>
+</CardGroup>
+
+---
+
+## Getting Help
+
+If you encounter issues during setup or have questions:
+
+- **Email Support:** [cloud@strettch.com](mailto:cloud@strettch.com)
+- **Documentation:** Browse our [complete guides](/guides/computes)
+- **Platform Status:** [cloud.strettch.com](https://cloud.strettch.com)
+
+Our support team is based in Africa and familiar with local infrastructure challenges.

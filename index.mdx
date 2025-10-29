@@ -1,62 +1,85 @@
 ---
-title: "😁 Welcome to the Strettch Cloud Platform"
-sidebarTitle: "Overview"
-description: "Strettch Cloud is an African, budget-friendly DigitalOcean alternative — designed to grow with you across Africa, while keeping your data local and compliant.
- ✨"
+title: "Introduction"
+description: "Get started with Strettch Cloud, infrastructure built for scale and affordability"
+mode: "custom"
 ---
 
-<CardGroup>
-  <Card
-    title="Quick Start Guide"
-    icon="book"
-    href="/getting-started/quickstart"
-  >
-    Get a fast overview in your first steps with Strettch Cloud.
-  </Card>
-  <Card title="Sign up" icon="user" href="https://console.cloud.strettch.com">
-    Our API documentation for developers (and you're here!).
-  </Card>
-</CardGroup>
+export const HeroCard = ({ imageSrc, imageSrcDark, title, description, href }) => {
+  return (
+    <a className="group cursor-pointer pb-8" href={href}>
+      <img
+        src={imageSrc}
+        className="pointer-events-none group-hover:scale-105 transition-all duration-100 block dark:hidden"
+        alt={title}
+      />
+      <img
+        src={imageSrcDark || imageSrc}
+        className="pointer-events-none group-hover:scale-105 transition-all duration-100 hidden dark:block"
+        alt={title}
+      />
+      <h3 className="mt-5 text-gray-900 dark:text-zinc-50 font-medium">
+        {title}
+      </h3>
+      <span className="mt-1.5">{description}</span>
+    </a>
+  );
+};
 
-<Snippet file="before-begin.mdx" />
+<div className="relative">
+  <div className="absolute top-0 left-0 right-0">
+    <img
+      src="/images/home/light/docs-hero-bg.png"
+      className="pointer-events-none block dark:hidden"
+      alt="Strettch Cloud hero background"
+    />
+    <img
+      src="/images/home/dark/docs-hero-bg.png"
+      className="pointer-events-none hidden dark:block"
+      alt="Strettch Cloud hero background"
+    />
+  </div>
 
-Once you've signed up, you can start deploying your applications on Strettch Cloud after selected the plan that suits your needs.
+  <div className="relative z-10 px-4 py-16 lg:py-48 lg:pb-24 max-w-3xl mx-auto">
+    <h1 className="block text-4xl font-medium text-center text-gray-900 dark:text-zinc-50 tracking-tight">
+      Documentation
+    </h1>
 
-<Steps>
-  <Step title="Choose your billing plan">
-    After signing up, select the billing plan that best suits your needs and budget. This will determine your resource limits and available features.
-  </Step>
-  <Step title="Set up your team">
-    You'll automatically have a default team created with you as the owner and member. This team serves as your workspace for managing projects and resources. You can learn more about [team management](/guides/teams) in our documentation.
-  </Step>
-  <Step title="Start scaling your infrastructure">
-    With your team set up, you can now begin building your cloud infrastructure:
-    - **Create computes**: Deploy virtual machines and containers
-    - **Add custom domains**: Connect your own domains to your applications  
-    - **Invite team members**: Collaborate by adding other developers to your team
-  </Step>
-</Steps>
+    <div className="max-w-xl mx-auto px-4 mt-4 text-lg text-center text-gray-500 dark:text-zinc-500">
+      Get started with Strettch Cloud, infrastructure built for scale and affordability
+    </div>
 
+    <div className="px-6 lg:px-0 mt-12 lg:mt-24 grid sm:grid-cols-2 gap-x-6 gap-y-4">
+      <HeroCard
+        imageSrc="/images/home/light/rocket.png"
+        imageSrcDark="/images/home/dark/rocket.png"
+        title="Quickstart"
+        description="Deploy your first VM in 2 minutes"
+        href="/getting-started/quickstart"
+      />
 
-## What's next?
-Now that you've learned how to deploy your project, you can explore the Strettch Cloud platform further. Here are some resources to help you get started:
+      <HeroCard
+        imageSrc="/images/home/light/compute.png"
+        imageSrcDark="/images/home/dark/compute.png"
+        title="Compute (VMs)"
+        description="Create, manage, resize, and troubleshoot VMs"
+        href="/guides/computes"
+      />
 
-<CardGroup>
-  <Card
-    title="Our site"
-    icon="globe"
-    href="https://cloud.strettch.com"
-  >
-    Learn more about the Strettch Cloud.
-  </Card>
-  <Card
-    title="Platform"
-    icon="server"
-    href="https://console.cloud.strettch.com"
-  >
-    Learn more about the Strettch Cloud CLI.
-  </Card>
-</CardGroup>
+      <HeroCard
+        imageSrc="/images/home/light/dns.png"
+        imageSrcDark="/images/home/dark/dns.png"
+        title="Domains & DNS"
+        description="Manage domains and DNS records"
+        href="/guides/domains"
+      />
 
-
-If you have any questions or need help, you can reach out to our [support team](mailto:cloud@strettch.com). We're here to help you! 🚀
+      <HeroCard
+        imageSrc="/images/home/light/support.png"
+        imageSrcDark="/images/home/dark/support.png"
+        title="Support"
+        description="Get help and contact our team"
+        href="/support"
+      />
+    </div>
+  </div>
+</div>

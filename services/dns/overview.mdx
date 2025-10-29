@@ -1,0 +1,61 @@
+---
+title: "DNS Overview"
+description: "Enterprise-grade DNS with fast propagation for your domains."
+---
+
+## What is Strettch Cloud DNS?
+
+Strettch Cloud DNS is a managed DNS service that lets you host and manage DNS records for your domains. It provides enterprise-grade performance with fast propagation across the global network.
+
+When you use Strettch Cloud DNS, you point your domain to our nameservers (`ns1.strettch.com` and `ns2.strettch.com`). From that point, you manage all DNS records directly through the Strettch Cloud dashboard.
+
+## Understanding DNS Basics
+
+### What are Nameservers?
+
+Nameservers are servers that store DNS records and respond to DNS queries. They tell the internet where to find your website, email servers, and other services.
+
+When you use Strettch Cloud DNS, you configure your domain registrar to use our nameservers:
+- `ns1.strettch.com`
+- `ns2.strettch.com`
+
+### What are DNS Records?
+
+DNS records are instructions that map domain names to IP addresses or other values. Each record type serves a specific purpose:
+
+| Record Type | Purpose | Example |
+| ----------- | ------- | ------- |
+| **A** | Maps domain to IPv4 address | `example.com` → `192.0.2.1` |
+| **AAAA** | Maps domain to IPv6 address | `example.com` → `2001:0db8:85a3::8a2e:0370:7334` |
+| **CNAME** | Creates alias from one domain to another | `blog.example.com` → `example.com` |
+| **MX** | Specifies mail servers for domain | `example.com` → `mail.example.com` |
+| **TXT** | Stores text information (verification, SPF, DKIM) | Domain verification strings, email policies |
+| **SRV** | Defines location of services | SIP, XMPP, and other service endpoints |
+| **NS** | Delegates subdomain to other nameservers | `api.example.com` → external DNS provider |
+
+### What is DNS Propagation?
+
+DNS propagation is the time it takes for DNS changes to update across all DNS servers on the internet. Traditional DNS changes can take 24-48 hours to propagate globally.
+
+With Strettch Cloud DNS, changes are fast on our nameservers. However, clients may still cache old records based on the TTL (Time To Live) value you set.
+
+### What is TTL?
+
+TTL (Time To Live) is the duration in seconds that DNS records are cached by DNS resolvers. A lower TTL means changes propagate faster but increases DNS queries. A higher TTL reduces queries but delays change propagation.
+
+Default TTL on Strettch Cloud DNS is 60 seconds, which balances performance with flexibility for updates.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Managing DNS" icon="gear" href="/services/dns/managing-dns">
+    Learn how to register domains, add nameservers, and manage DNS records
+  </Card>
+  <Card title="SC Compute" icon="server" href="/services/compute/overview">
+    Deploy applications that your DNS records can point to
+  </Card>
+</CardGroup>
+
+<Note>
+  **Need help?** Contact our [support team](mailto:cloud@strettch.com) or visit [cloud.strettch.com](https://cloud.strettch.com).
+</Note>

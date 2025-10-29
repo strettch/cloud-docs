@@ -1,0 +1,82 @@
+---
+title: Core Concepts
+description: Understanding the fundamental building blocks of Strettch Cloud
+---
+
+Before deploying your first resources on Strettch Cloud, understanding these core concepts will help you organize your infrastructure and manage costs effectively.
+
+---
+
+## Understanding Teams
+
+**Problem**: How do I organize my cloud resources and collaborate with others?
+
+Teams are the top-level organizational structure in Strettch Cloud. Every resource you create—compute instances, DNS zones, and more—belongs to a team.
+
+### How Teams Work
+
+When you create your first account, Strettch Cloud automatically creates a default team for you, named after your first name (for example, "Liberi's Team" if your name is Liberi). You can create additional teams or join existing ones to collaborate with other users.
+
+**Team Structure with Multiple Teams**:
+
+<Frame>
+  <img className="block dark:hidden" src="/images/computes/team-architecture.png" style={{ borderRadius: '0.2rem' }} />
+  <img className="hidden dark:block" src="/images/computes/team-architecture-dark.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+
+### Key Team Principles
+
+- **Resources belong directly to teams**: There is no intermediate project layer. When you create a compute instance or DNS zone, it belongs to the team.
+- **Users can join multiple teams**: You can be a member of several teams simultaneously, each with its own resources and billing.
+- **Teams have roles**: Teams include roles like owner and member to control who can manage resources. See the Teams documentation for details on permissions.
+- **Teams are isolated**: Teams cannot share resources or billing with each other. Each team operates independently.
+
+<Warning>
+**Violation Policy**
+
+If any team member uses a team resource to commit a violation (for example, illegal activity on a compute instance), all resources belonging to that team will be shut down immediately pending investigation. This may result in a permanent ban.
+</Warning>
+
+---
+
+## How Billing Works
+
+**Problem**: When am I charged for my cloud resources?
+
+Strettch Cloud uses a **pay-as-you-go** billing model. Understanding how this works helps you predict and control costs.
+
+### Pay-as-you-go vs Pay-per-use
+
+Strettch Cloud uses **pay-as-you-go**, not pay-per-use. Here's the comparison:
+
+| Billing Model | How It Works | Used by Us? |
+|---------------|--------------|-------------|
+| **Pay-as-you-go** | You are billed for how long you reserve resources, regardless of actual usage. A compute instance reserved for 24 hours costs the same whether you use it heavily or leave it idle. | ✓ Yes |
+| **Pay-per-use** | You are billed based on actual resource consumption with auto-scaling. If a 1 CPU / 2GB instance scales to 2 CPU / 4GB, you are billed for the increased specs. | ✗ No |
+
+<Tip>
+**Billing Example**
+
+A compute instance costs **10 RWF per hour**. If you reserve this instance for 24 hours:
+```
+10 RWF/hour × 24 hours = 240 RWF total
+```
+
+You pay 240 RWF regardless of whether the instance processes workloads all day or sits idle.
+</Tip>
+
+<Warning>
+Stopping a compute instance does not stop billing. To stop incurring charges, you must destroy the resource. See [Resource Lifecycle in SC Compute Overview](/services/compute/overview#resource-lifecycle) for details on resource states.
+</Warning>
+
+---
+
+## Next Steps
+
+Now that you understand how teams and billing work:
+
+- [Create your first compute instance](/getting-started/quickstart)
+- [Learn about SC Compute and resource lifecycles](/services/compute/overview)
+- [Manage your team](/guides/teams)
+- [Set up DNS for your domains](/guides/domains)

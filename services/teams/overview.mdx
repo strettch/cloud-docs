@@ -1,0 +1,128 @@
+---
+title: Teams Overview
+description: Understanding team structure and organization in Strettch Cloud
+---
+
+## What are Teams?
+
+Teams are the top-level organizational structure in Strettch Cloud. Every resource you create—compute instances, DNS zones, and more—belongs to a team.
+
+When you create your first account, Strettch Cloud automatically creates a default team for you, named after your first name (for example, "Liberi's Team" if your name is Liberi). You can create additional teams or join existing ones to collaborate with other users.
+
+---
+
+## How Teams Organize Resources
+
+All cloud resources in Strettch Cloud belong directly to teams. There is no intermediate project or organization layer.
+
+**Team Structure Example**:
+```
+        ┌──────────────────────┐         ┌──────────────────────┐
+        │  Liberi's Team       │         │  Acme Corp Team      │
+        ├──────────────────────┤         ├──────────────────────┤
+        │ Resources:           │         │ Resources:           │
+        │  • Compute-001       │         │  • Compute-100       │
+        │  • Compute-002       │         │  • Compute-101       │
+        │  • DNS: example.com  │         │  • DNS: acme.io      │
+        └──────────────────────┘         └──────────────────────┘
+                 ↑                                ↑
+                 │                                │
+                 └────────────┬───────────────────┘
+                              │
+                         User (Liberi)
+                      Member of both teams
+
+    ✓ Each team has isolated resources (no sharing)
+    ✓ Users can belong to multiple teams
+    ✓ Each team has separate billing
+```
+
+### Key Principles
+
+**Resources Belong to Teams**
+
+When you create a compute instance, DNS zone, or any other resource, it belongs to the team. All team members with appropriate permissions can access and manage these resources.
+
+**Users Can Join Multiple Teams**
+
+You can be a member of several teams simultaneously. Each team operates independently with its own resources, members, and billing.
+
+**Teams Are Isolated**
+
+Teams cannot share resources or billing with each other. A compute instance created in "Team A" cannot be transferred to "Team B."
+
+**Separate Billing Per Team**
+
+Each team has its own billing account. Usage and charges for resources are tracked separately for each team.
+
+---
+
+## Team Roles and Permissions
+
+Teams use a role-based access control system with three levels of access:
+
+| Role | Permissions | Who Should Have This Role |
+|------|-------------|---------------------------|
+| **Owner** | Full control including team deletion and ownership transfer | Team creator or designated owner |
+| **Admin** | Manage resources, invite/remove users, update payment methods | Trusted team administrators |
+| **Member** | Manage emails, domains, and webhooks | Developers and contributors |
+
+### Permission Details
+
+**Owner**
+- All Admin permissions
+- Delete the team
+- Transfer team ownership
+- Remove Admins from the team
+
+**Admin**
+- All Member permissions
+- Invite new users to the team
+- Remove Members from the team
+- Change Member roles
+- Update payment methods
+- Manage team settings (name, avatar)
+
+**Member**
+- Create and manage compute instances
+- Manage DNS zones and records
+- Configure webhooks
+- View team resources
+- Access billing information (view-only)
+
+<Warning>
+**Violation Policy**
+
+If any team member uses a team resource to commit a violation (for example, illegal activity on a compute instance), all resources belonging to that team will be shut down immediately pending investigation. This may result in a permanent ban.
+</Warning>
+
+---
+
+## Team Collaboration
+
+### How Collaboration Works
+
+Team members with appropriate permissions can work together on shared resources. When one member creates a compute instance, all team members can see it in the dashboard and manage it according to their role permissions.
+
+### Switching Between Teams
+
+If you belong to multiple teams, you can switch between them using the team selector in the dashboard. Resources and billing information change based on the currently selected team.
+
+---
+
+## Next Steps
+
+Now that you understand how Teams work in Strettch Cloud:
+
+<CardGroup cols={2}>
+  <Card title="Managing Teams" icon="users-gear" href="/services/teams/managing-teams">
+    Learn how to invite members, change roles, and manage team settings
+  </Card>
+  <Card title="Create Compute Instance" icon="server" href="/getting-started/quickstart">
+    Start deploying resources for your team
+  </Card>
+</CardGroup>
+
+<Note>
+  **Need help?** Contact our [support team](mailto:cloud@strettch.com) or visit [cloud.strettch.com](https://cloud.strettch.com).
+</Note>
