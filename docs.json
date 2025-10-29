@@ -49,10 +49,17 @@
             ]
           },
           {
-            "group": "Core Features",
+            "group": "DNS",
             "pages": [
-              "guides/teams",
-              "guides/domains"
+              "services/dns/overview",
+              "services/dns/managing-dns"
+            ]
+          },
+          {
+            "group": "Teams",
+            "pages": [
+              "services/teams/overview",
+              "services/teams/managing-teams"
             ]
           },
           {

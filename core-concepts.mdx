@@ -18,26 +18,12 @@ Teams are the top-level organizational structure in Strettch Cloud. Every resour
 When you create your first account, Strettch Cloud automatically creates a default team for you, named after your first name (for example, "Liberi's Team" if your name is Liberi). You can create additional teams or join existing ones to collaborate with other users.
 
 **Team Structure with Multiple Teams**:
-```
-        ┌──────────────────────┐         ┌──────────────────────┐
-        │  Liberi's Team       │         │  Acme Corp Team      │
-        ├──────────────────────┤         ├──────────────────────┤
-        │ Resources:           │         │ Resources:           │
-        │  • Compute-001       │         │  • Compute-100       │
-        │  • Compute-002       │         │  • Compute-101       │
-        │  • DNS: example.com  │         │  • DNS: acme.io      │
-        └──────────────────────┘         └──────────────────────┘
-                 ↑                                ↑
-                 │                                │
-                 └────────────┬───────────────────┘
-                              │
-                         User (Liberi)
-                      Member of both teams
 
-    ✓ Each team has isolated resources (no sharing)
-    ✓ Users can belong to multiple teams
-    ✓ Each team has separate billing
-```
+<Frame>
+  <img className="block dark:hidden" src="/images/computes/team-architecture.png" style={{ borderRadius: '0.2rem' }} />
+  <img className="hidden dark:block" src="/images/computes/team-architecture-dark.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
 
 ### Key Team Principles
 

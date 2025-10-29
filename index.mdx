@@ -4,12 +4,17 @@ description: "Get started with Strettch Cloud, infrastructure built for scale an
 mode: "custom"
 ---
 
-export const HeroCard = ({ imageSrc, title, description, href }) => {
+export const HeroCard = ({ imageSrc, imageSrcDark, title, description, href }) => {
   return (
     <a className="group cursor-pointer pb-8" href={href}>
       <img
         src={imageSrc}
-        className="pointer-events-none group-hover:scale-105 transition-all duration-100"
+        className="pointer-events-none group-hover:scale-105 transition-all duration-100 block dark:hidden"
+        alt={title}
+      />
+      <img
+        src={imageSrcDark || imageSrc}
+        className="pointer-events-none group-hover:scale-105 transition-all duration-100 hidden dark:block"
         alt={title}
       />
       <h3 className="mt-5 text-gray-900 dark:text-zinc-50 font-medium">
@@ -23,8 +28,13 @@ export const HeroCard = ({ imageSrc, title, description, href }) => {
 <div className="relative">
   <div className="absolute top-0 left-0 right-0">
     <img
-      src="https://res.cloudinary.com/dawr8i20o/image/upload/v1761306337/strettch-cloud/sc-docs/hero.png"
-      className="pointer-events-none"
+      src="/images/home/light/docs-hero-bg.png"
+      className="pointer-events-none block dark:hidden"
+      alt="Strettch Cloud hero background"
+    />
+    <img
+      src="/images/home/dark/docs-hero-bg.png"
+      className="pointer-events-none hidden dark:block"
       alt="Strettch Cloud hero background"
     />
   </div>
@@ -40,28 +50,32 @@ export const HeroCard = ({ imageSrc, title, description, href }) => {
 
     <div className="px-6 lg:px-0 mt-12 lg:mt-24 grid sm:grid-cols-2 gap-x-6 gap-y-4">
       <HeroCard
-        imageSrc="https://res.cloudinary.com/dawr8i20o/image/upload/v1761306248/strettch-cloud/sc-docs/quick-start.png"
+        imageSrc="/images/home/light/rocket.png"
+        imageSrcDark="/images/home/dark/rocket.png"
         title="Quickstart"
         description="Deploy your first VM in 2 minutes"
         href="/getting-started/quickstart"
       />
 
       <HeroCard
-        imageSrc="https://res.cloudinary.com/dawr8i20o/image/upload/v1761306284/strettch-cloud/sc-docs/compute.png"
+        imageSrc="/images/home/light/compute.png"
+        imageSrcDark="/images/home/dark/compute.png"
         title="Compute (VMs)"
         description="Create, manage, resize, and troubleshoot VMs"
         href="/guides/computes"
       />
 
       <HeroCard
-        imageSrc="https://res.cloudinary.com/dawr8i20o/image/upload/v1761306305/strettch-cloud/sc-docs/dns.png"
+        imageSrc="/images/home/light/dns.png"
+        imageSrcDark="/images/home/dark/dns.png"
         title="Domains & DNS"
         description="Manage domains and DNS records"
         href="/guides/domains"
       />
 
       <HeroCard
-        imageSrc="https://res.cloudinary.com/dawr8i20o/image/upload/v1761306301/strettch-cloud/sc-docs/support.png"
+        imageSrc="/images/home/light/support.png"
+        imageSrcDark="/images/home/dark/support.png"
         title="Support"
         description="Get help and contact our team"
         href="/support"

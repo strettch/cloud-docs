@@ -160,7 +160,9 @@ You need a public IP address when your instance must:
 
 #### Cost
 
-Public IP addresses cost **1,000 RWF** and are billed separately from compute resources.
+<Warning>
+Public IP addresses are billed separately from compute resources. Check current pricing in your dashboard when creating a compute instance.
+</Warning>
 
 #### How to Attach a Public IP
 
@@ -182,50 +184,19 @@ Simply check the box to attach a public IP to your instance.
 
 Imagine you're running a web application with these components:
 
-```
-                    PUBLIC INTERNET
-                          ↑
-                          │ Public IP (1,000 RWF)
-                          │
-    ══════════════════════╪══════════════════════════════
-    ║                     │                            ║
-    ║  PRIVATE NETWORK (Your Team's Internal Network) ║
-    ║                     │                            ║
-    ║             ┌───────┴────────┐                   ║
-    ║             │ Reverse Proxy  │ ← Has Public IP  ║
-    ║             │ (Caddy/Nginx)  │    Public security║
-    ║             └───────┬────────┘    measures here  ║
-    ║                     │                            ║
-    ║         ┌───────────┴───────────┐                ║
-    ║         │                       │                ║
-    ║         ↓                       ↓                ║
-    ║   ┌──────────┐            ┌──────────┐          ║
-    ║   │ Frontend │            │ Backend  │          ║
-    ║   │    VM    │            │    VM    │          ║
-    ║   │(no public│            │(no public│          ║
-    ║   │   IP)    │            │   IP)    │          ║
-    ║   └──────────┘            └────┬─────┘          ║
-    ║                                │                 ║
-    ║                                ↓                 ║
-    ║                          ┌──────────┐            ║
-    ║                          │ Database │            ║
-    ║                          │    VM    │            ║
-    ║                          │(no public│            ║
-    ║                          │   IP)    │            ║
-    ║                          └──────────┘            ║
-    ║                                                   ║
-    ══════════════════════════════════════════════════════
+<Frame>
+  <img className="block dark:hidden" src="/images/computes/public-private-internet-archtecture.jpg" style={{ borderRadius: '0.2rem' }} />
+  <img className="hidden dark:block" src="/images/computes/public-private-internet-archtecture-dark.jpg" style={{ borderRadius: '0.2rem' }} />
+</Frame>
 
-Legend:
-• All VMs are in the private network
-• Reverse Proxy: Has a public IP, accessible from internet
-• Frontend, Backend, Database: No public IP, only accessible within private network
-• Database: Only communicates with Backend VM
-```
+**Legend:**
+- All VMs are in the private network
+- Reverse Proxy: Has a public IP, accessible from internet
+- Frontend, Backend, Database: No public IP, only accessible within private network
 
 **Benefits of this approach:**
 1. **Enhanced Security** - Only one VM is exposed to the internet, reducing attack surface
-2. **Cost Savings** - Pay for only one public IP (1,000 RWF) instead of four (4,000 RWF)
+2. **Cost Savings** - Pay for only one public IP instead of multiple (public IPs are billed separately)
 3. **Centralized Public Security** - Configure internet-facing firewalls, SSL certificates, and security rules in one place
 4. **Simplified Management** - Update public security measures on one VM instead of multiple
 
