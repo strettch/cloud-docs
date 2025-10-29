@@ -92,7 +92,7 @@ Access your compute through a browser-based console without needing any SSH clie
   </Step>
 
   <Step title="Wait for SC Agent Installation">
-    The [SC Agent](/agents/sc-agent) is automatically installed on your compute. It will be ready within **less than 3 minutes** of compute creation.
+    The [SC Agent](/agents/sc-agent) is automatically installed on your compute. It will be ready within a few minutes of compute creation.
 
     The SC Agent enables browser-based console access. You can start using the console as soon as the agent installation completes.
   </Step>
@@ -126,7 +126,7 @@ Connect directly via SSH from your local terminal for a native command-line expe
     ```
 
     <Note>
-    **Port 222**: Required for most internet providers. MTN network users can connect without specifying the port (default port 22).
+    **Port 222:** Strettch Cloud uses port 222 instead of the default port 22 for SSH access due to a firewall restriction from our upstream internet provider. This applies to most connections. However, if you are connecting from within certain networks (such as MTN in Rwanda), you may be able to connect using the default port 22 without specifying `-p 222`.
     </Note>
   </Step>
 
@@ -161,7 +161,7 @@ You need a public IP address when your instance must:
 #### Cost
 
 <Warning>
-Public IP addresses are billed separately from compute resources. Check current pricing in your dashboard when creating a compute instance.
+Public IP addresses are billed separately from compute resources. The pricing for public IPs can be found in your dashboard when creating a compute instance. Check the current rates before enabling this option.
 </Warning>
 
 #### How to Attach a Public IP
@@ -189,16 +189,20 @@ Imagine you're running a web application with these components:
   <img className="hidden dark:block" src="/images/computes/public-private-internet-archtecture-dark.jpg" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-**Legend:**
-- All VMs are in the private network
-- Reverse Proxy: Has a public IP, accessible from internet
-- Frontend, Backend, Database: No public IP, only accessible within private network
+**How this architecture works:**
+
+**Private Network (Foundation)**
+- All computes exist in a secure private network where they can communicate with each other
+
+**Public IP Assignment (Optional)**
+- **Reverse Proxy**: Has a public IP attached, making it accessible from the internet and able to route traffic to private services
+- **Frontend, Backend, Database**: No public IPs attached, so they remain inaccessible from the internet but can communicate within the private network
 
 **Benefits of this approach:**
-1. **Enhanced Security** - Only one VM is exposed to the internet, reducing attack surface
+1. **Enhanced Security** - Only one compute is exposed to the internet, reducing attack surface
 2. **Cost Savings** - Pay for only one public IP instead of multiple (public IPs are billed separately)
 3. **Centralized Public Security** - Configure internet-facing firewalls, SSL certificates, and security rules in one place
-4. **Simplified Management** - Update public security measures on one VM instead of multiple
+4. **Simplified Management** - Update public security measures on one compute instead of multiple
 
 ---
 
@@ -224,7 +228,7 @@ Your compute includes five real-time performance graphs that help you understand
 | **CPU Usage** | Processing power utilization (user jobs and system processes) | Sustained high CPU (>80%) suggests you need more CPU cores |
 | **Disk I/O** | Read and write operations in MB/s | High I/O wait times can slow down applications |
 | **Network** | Inbound and outbound traffic (packets) | Unexpected spikes may indicate traffic anomalies |
-| **Load** | Server resource load in MBs | Load higher than CPU count suggests resource contention |
+| **Load** | System load average (number of processes waiting for CPU) | Load higher than CPU count suggests resource contention |
 
 ### Time Range Options
 
