@@ -13,82 +13,44 @@ When you create your first account, Strettch Cloud automatically creates a defau
 
 ## How Teams Organize Resources
 
-All cloud resources in Strettch Cloud belong directly to teams. There is no intermediate project or organization layer.
+All cloud resources belong directly to teams—there is no intermediate project or organization layer. All team members with appropriate permissions can access and manage these resources.
 
-**Team Structure Example**:
-```
-        ┌──────────────────────┐         ┌──────────────────────┐
-        │  Liberi's Team       │         │  Acme Corp Team      │
-        ├──────────────────────┤         ├──────────────────────┤
-        │ Resources:           │         │ Resources:           │
-        │  • Compute-001       │         │  • Compute-100       │
-        │  • Compute-002       │         │  • Compute-101       │
-        │  • DNS: example.com  │         │  • DNS: acme.io      │
-        └──────────────────────┘         └──────────────────────┘
-                 ↑                                ↑
-                 │                                │
-                 └────────────┬───────────────────┘
-                              │
-                         User (Liberi)
-                      Member of both teams
-
-    ✓ Each team has isolated resources (no sharing)
-    ✓ Users can belong to multiple teams
-    ✓ Each team has separate billing
-```
+<Frame>
+  <img className="block dark:hidden" src="/images/computes/team-architecture.png" style={{ borderRadius: '0.2rem' }} />
+  <img className="hidden dark:block" src="/images/computes/team-architecture-dark.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
 
 ### Key Principles
 
-**Resources Belong to Teams**
-
-When you create a compute instance, DNS zone, or any other resource, it belongs to the team. All team members with appropriate permissions can access and manage these resources.
-
-**Users Can Join Multiple Teams**
-
-You can be a member of several teams simultaneously. Each team operates independently with its own resources, members, and billing.
-
-**Teams Are Isolated**
-
-Teams cannot share resources or billing with each other. A compute instance created in "Team A" cannot be transferred to "Team B."
-
-**Separate Billing Per Team**
-
-Each team has its own billing account. Usage and charges for resources are tracked separately for each team.
+- **Isolated Resources**: Teams cannot share resources or billing. A compute instance in "Team A" cannot be transferred to "Team B."
+- **Multi-Team Membership**: You can belong to multiple teams simultaneously, each with independent resources and billing.
+- **Separate Billing**: Each team has its own billing account. Usage and charges are tracked separately per team.
 
 ---
 
 ## Team Roles and Permissions
 
-Teams use a role-based access control system with three levels of access:
+Teams use a role-based access control system with three levels:
 
-| Role | Permissions | Who Should Have This Role |
-|------|-------------|---------------------------|
-| **Owner** | Full control including team deletion and ownership transfer | Team creator or designated owner |
-| **Admin** | Manage resources, invite/remove users, update payment methods | Trusted team administrators |
-| **Member** | Manage emails, domains, and webhooks | Developers and contributors |
-
-### Permission Details
-
-**Owner**
-- All Admin permissions
-- Delete the team
-- Transfer team ownership
-- Remove Admins from the team
-
-**Admin**
-- All Member permissions
-- Invite new users to the team
-- Remove Members from the team
-- Change Member roles
-- Update payment methods
-- Manage team settings (name, avatar)
-
-**Member**
-- Create and manage compute instances
-- Manage DNS zones and records
-- Configure webhooks
-- View team resources
-- Access billing information (view-only)
+| Permission | Owner | Admin | Member |
+|------------|-------|-------|--------|
+| **Resource Management** |
+| &nbsp;&nbsp;&nbsp;&nbsp;Manage compute instances | ✓ | ✓ | ✓ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Manage DNS zones | ✓ | ✓ | ✓ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Configure webhooks | ✓ | ✓ | ✓ |
+| &nbsp;&nbsp;&nbsp;&nbsp;View resources | ✓ | ✓ | ✓ |
+| **Team Management** |
+| &nbsp;&nbsp;&nbsp;&nbsp;Invite users | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Remove Members | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Remove Admins | ✓ | ⛔ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Change roles | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Update team settings | ✓ | ✓ | ⛔ |
+| **Billing & Finance** |
+| &nbsp;&nbsp;&nbsp;&nbsp;View billing info | ✓ | ✓ | ✓ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Update payment methods | ✓ | ✓ | ⛔ |
+| **Critical Actions** |
+| &nbsp;&nbsp;&nbsp;&nbsp;Delete team | ✓ | ⛔ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Transfer ownership | ✓ | ⛔ | ⛔ |
 
 <Warning>
 **Violation Policy**
@@ -96,17 +58,9 @@ Teams use a role-based access control system with three levels of access:
 If any team member uses a team resource to commit a violation (for example, illegal activity on a compute instance), all resources belonging to that team will be shut down immediately pending investigation. This may result in a permanent ban.
 </Warning>
 
----
-
-## Team Collaboration
-
-### How Collaboration Works
-
-Team members with appropriate permissions can work together on shared resources. When one member creates a compute instance, all team members can see it in the dashboard and manage it according to their role permissions.
-
 ### Switching Between Teams
 
-If you belong to multiple teams, you can switch between them using the team selector in the dashboard. Resources and billing information change based on the currently selected team.
+Use the team selector in the dashboard to switch between teams. Resources and billing information change based on the currently selected team.
 
 ---
 
