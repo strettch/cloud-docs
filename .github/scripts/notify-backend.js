@@ -29,7 +29,8 @@ const options = {
   path: '/api/changelog',
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization':'Bearer a6d20a8a-3eb2-42f7-9762-5c8a1ec0b464'
   }
 };
 
