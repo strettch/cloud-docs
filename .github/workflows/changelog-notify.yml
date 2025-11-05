@@ -1,35 +1,31 @@
-name: Notify on Changelog Update
+name: Changelog Release Notification
 
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
+    inputs:
+      release_summary:
+        description: 'The final, short summary of the release to be sent to the API.'
+        required: true
+        default: 'Major platform stability and performance improvements.'
+      version_tag:
+        description: 'The version tag (e.g., v1.5.0) associated with this release.'
+        required: false
+        default: 'vX.Y.Z'
+      
 jobs:
-  check_and_notify:
+  notify_backend:
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
 
-      - name: Check for changelog changes
-        id: changed-files
-        uses: tj-actions/changed-files@v35
-        with:
-          files: |
-            changelog.mdx
+      - name: Install dependencies
+        run: npm install --prefix .github/scripts
 
-      - name: Notify backend if summary changed
-        if: steps.changed-files.outputs.any_changed == 'true'
-        run: |
-          # 1. Install dependencies
-          npm install --prefix .github/scripts
-          
-          # 2. Get the *previous* version of the file
-          #    This is the key new line.
-          git show HEAD~1:changelog.mdx > .github/scripts/old_changelog.mdx || echo "---" > .github/scripts/old_changelog.mdx
-          
-          # 3. Run the "smart" script
-          node .github/scripts/notify-backend.js
+      - name: Execute Release Notification Script
+        run: node .github/scripts/notify-backend.js
+        env:
+          RELEASE_SUMMARY: ${{ github.event.inputs.release_summary }}
+          VERSION_TAG: ${{ github.event.inputs.version_tag }}
+          BACKEND_API_SECRET: ${{ secrets.CHANGELOG_API_SECRET }}

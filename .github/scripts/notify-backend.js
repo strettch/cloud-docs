@@ -1,54 +1,51 @@
 const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-
-const workspace = process.env.GITHUB_WORKSPACE;
-const newChangelogPath = path.join(workspace, 'changelog.mdx');
-const newFileContent = fs.readFileSync(newChangelogPath, 'utf8');
-const { data: newFrontmatter } = matter(newFileContent);
-const newSummary = newFrontmatter.summary;
 
 
-const oldChangelogPath = path.join(__dirname, 'old_changelog.mdx');
-const oldFileContent = fs.readFileSync(oldChangelogPath, 'utf8');
-const { data: oldFrontmatter } = matter(oldFileContent);
-const oldSummary = oldFrontmatter.summary;
-if (!newSummary) {
-  console.error("Error: 'summary' not found in changelog.mdx frontmatter.");
-  process.exit(1); 
+const summary = process.env.RELEASE_SUMMARY;
+const versionTag = process.env.VERSION_TAG;
+const apiToken = process.env.BACKEND_API_SECRET;
+
+
+if (!summary) {
+  console.error("FATAL ERROR: RELEASE_SUMMARY missing from workflow inputs.");
+  process.exit(1);
 }
 
-if (newSummary === oldSummary) {
-  console.log('Summary is unchanged. Skipping notification.');
-  process.exit(0); 
-}
-console.log('Summary has changed. Sending notification...');
+
 const options = {
-  hostname: 'changelog-api.strettchcloud.com',
+  hostname: 'changelog-api.strettchcloud.com', 
   path: '/api/changelog',
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization':'Bearer a6d20a8a-3eb2-42f7-9762-5c8a1ec0b464'
+    'Authorization': `Bearer ${apiToken}` 
   }
 };
 
+
 const requestBody = JSON.stringify({
-  message: 'Changelog has been updated!',
-  summary: newSummary,
+  summary: `${versionTag ? `[${versionTag}]` : ""} ${summary}`, 
+  message: `New official release pushed: ${versionTag}`,
   timestamp: new Date().toISOString()
 });
 
+console.log(`Sending notification for version: ${versionTag}`);
+console.log(`Payload: ${requestBody}`);
+
 const req = https.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`);
+  console.log(`API Response Status Code: ${res.statusCode}`);
+  if (res.statusCode < 200 || res.statusCode >= 300) {
+      console.error(`API call failed with status: ${res.statusCode}`);
+      process.exit(1);
+  }
+
   res.on('data', d => {
     process.stdout.write(d);
   });
 });
 
 req.on('error', error => {
-  console.error(error);
+  console.error('Error during API request:', error);
   process.exit(1);
 });
 
