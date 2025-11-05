@@ -21,7 +21,15 @@ jobs:
           files: |
             changelog.mdx
 
-      - name: Notify backend if changelog changed
+      - name: Notify backend if summary changed
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
+          # 1. Install dependencies
+          npm install --prefix .github/scripts
+          
+          # 2. Get the *previous* version of the file
+          #    This is the key new line.
+          git show HEAD~1:changelog.mdx > .github/scripts/old_changelog.mdx || echo "---" > .github/scripts/old_changelog.mdx
+          
+          # 3. Run the "smart" script
           node .github/scripts/notify-backend.js
