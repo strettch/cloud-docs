@@ -3,6 +3,14 @@ name: Changelog Release Notification
 on:
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - dev
+        default: 'dev'
       release_summary:
         description: 'The final, short description of the release to be sent to the API.'
         required: true
@@ -19,6 +27,7 @@ on:
         description: 'The tag (e.g., Feature, Fix) associated with this release.'
         required: true
         default: 'Feature'
+    
       
 jobs:
   notify_backend:
@@ -34,6 +43,7 @@ jobs:
       - name: Execute Release Notification Script
         run: node .github/scripts/notify-backend.js
         env:
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
           RELEASE_SUMMARY: ${{ github.event.inputs.release_summary }}
           RELEASE_TITLE: ${{ github.event.inputs.release_title }}
           RELEASE_IMAGE_URL: ${{ github.event.inputs.release_image_url }}
