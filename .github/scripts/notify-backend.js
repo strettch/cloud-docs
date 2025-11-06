@@ -3,8 +3,8 @@ const https = require('https');
 
 const summary = process.env.RELEASE_SUMMARY;
 const versionTag = process.env.VERSION_TAG;
-const title = process.env.REALEASE_TITLE;
-const imageUrl = process.env.REALEASE_IMAGE_URL;
+const title = process.env.RELEASE_TITLE;
+const imageUrl = process.env.RELEASE_IMAGE_URL;
 const apiToken = process.env.BACKEND_API_SECRET;
 
 
