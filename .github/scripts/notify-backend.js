@@ -3,6 +3,8 @@ const https = require('https');
 
 const summary = process.env.RELEASE_SUMMARY;
 const versionTag = process.env.VERSION_TAG;
+const title = process.env.REALEASE_TITLE;
+const imageUrl = process.env.REALEASE_IMAGE_URL;
 const apiToken = process.env.BACKEND_API_SECRET;
 
 
@@ -24,8 +26,10 @@ const options = {
 
 
 const requestBody = JSON.stringify({
-  summary: `${versionTag ? `[${versionTag}]` : ""} ${summary}`, 
-  message: `New official release pushed: ${versionTag}`,
+  summary: summary, 
+  tag: versionTag,
+  title: title,
+  imageUrl: imageUrl,
   timestamp: new Date().toISOString()
 });
 

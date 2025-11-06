@@ -4,13 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       release_summary:
-        description: 'The final, short summary of the release to be sent to the API.'
+        description: 'The final, short description of the release to be sent to the API.'
         required: true
         default: 'Major platform stability and performance improvements.'
-      version_tag:
-        description: 'The version tag (e.g., v1.5.0) associated with this release.'
+      release_title:
+        description: 'The title, short headline of the release to be sent to the API.'
+        required: true
+        default: 'Title.'
+      release_image_url:
+        description: 'The image url, short url of the release to be sent to the API.'
+        required: true
+        default: 'https//'
+      tag:
+        description: 'The tag (e.g., Feature, Fix) associated with this release.'
         required: false
-        default: 'vX.Y.Z'
+        default: 'Feature'
       
 jobs:
   notify_backend:
@@ -27,5 +35,7 @@ jobs:
         run: node .github/scripts/notify-backend.js
         env:
           RELEASE_SUMMARY: ${{ github.event.inputs.release_summary }}
+          RELEASE_TITLE: ${{ github.event.inputs.release_title }}
+          RELEASE_IMAGE_URL: ${{ github.event.inputs.release_image_url }}
           VERSION_TAG: ${{ github.event.inputs.version_tag }}
           BACKEND_API_SECRET: ${{ secrets.CHANGELOG_API_SECRET }}
