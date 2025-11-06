@@ -6,6 +6,7 @@ const versionTag = process.env.VERSION_TAG;
 const title = process.env.RELEASE_TITLE;
 const imageUrl = process.env.RELEASE_IMAGE_URL;
 const apiToken = process.env.BACKEND_API_SECRET;
+const environment = process.env.ENVIRONMENT || 'production';
 
 
 if (!summary) {
@@ -13,10 +14,14 @@ if (!summary) {
   process.exit(1);
 }
 
+const apiPath = environment === 'dev' ? '/api/changelog/dev' : '/api/changelog';
+
+console.log(`Using environment: ${environment}`);
+console.log(`API path: ${apiPath}`);
 
 const options = {
   hostname: 'changelog-api.strettchcloud.com', 
-  path: '/api/changelog',
+  path: apiPath,
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
