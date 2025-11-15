@@ -5,6 +5,7 @@ const summary = process.env.RELEASE_SUMMARY;
 const versionTag = process.env.VERSION_TAG;
 const title = process.env.RELEASE_TITLE;
 const imageUrl = process.env.RELEASE_IMAGE_URL;
+const section_id=process.env.SECTION_ID;
 const apiToken = process.env.BACKEND_API_SECRET;
 const environment = process.env.ENVIRONMENT || 'production';
 
@@ -35,6 +36,7 @@ const requestBody = JSON.stringify({
   tag: versionTag,
   title: title,
   imageUrl: imageUrl,
+  sectionID: section_id,
   timestamp: new Date().toISOString()
 });
 

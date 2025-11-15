@@ -23,6 +23,10 @@ on:
         description: 'The image url, short url of the release to be sent to the API.'
         required: true
         default: 'https//'
+      section_id:
+        description: 'The unique identifier of the changelog section pointing to that weeks updates'
+        required: true
+        default: 'week-of-october-21-27,-2025'
       tag:
         description: 'The tag (e.g., Feature, Fix) associated with this release.'
         required: true
@@ -47,5 +51,6 @@ jobs:
           RELEASE_SUMMARY: ${{ github.event.inputs.release_summary }}
           RELEASE_TITLE: ${{ github.event.inputs.release_title }}
           RELEASE_IMAGE_URL: ${{ github.event.inputs.release_image_url }}
+          SECTION_ID: ${{ github.event.inputs.section_id }}
           VERSION_TAG: ${{ github.event.inputs.tag }}
           BACKEND_API_SECRET: ${{ secrets.CHANGELOG_API_SECRET }}
