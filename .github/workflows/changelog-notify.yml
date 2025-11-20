@@ -4,39 +4,37 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment'
+        description: 'Environment'
         required: true
         type: choice
         options:
           - production
           - dev
         default: 'dev'
+      release_title:
+        description: 'Title'
+        required: true
+        default: 'Team Creation'
       release_summary:
-        description: 'The final, short description of the release to be sent to the API.'
+        description: 'Release Summary'
         required: true
         default: 'Major platform stability and performance improvements.'
-      release_title:
-        description: 'The title, short headline of the release to be sent to the API.'
-        required: true
-        default: 'Title.'
       release_image_url:
-        description: 'The image url, short url of the release to be sent to the API.'
+        description: 'Release Preview (Image / Gif)'
         required: true
-        default: 'https//'
-      section_id:
-        description: 'The unique identifier of the changelog section pointing to that weeks updates'
-        required: true
-        default: 'week-of-october-21-27,-2025'
+        default: 'https//example.com/image-preview.webp'
       tag:
-        description: 'The tag (e.g., Feature, Fix) associated with this release.'
+        description: 'Release Category'
         required: true
-        default: 'Feature'
-    
-      
+        type: choice
+        options:
+          - Feature
+
+
 jobs:
   notify_backend:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
