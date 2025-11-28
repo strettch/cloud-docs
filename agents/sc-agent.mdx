@@ -3,7 +3,7 @@ title: "SC Agent"
 description: "Browser-based console access for your virtual machines"
 ---
 
-The SC Agent is a lightweight, open-source utility that enables web-based console access to your computes directly from the Strettch Cloud dashboard. It manages the SSH connection between your browser and the compute to provide seamless terminal access without requiring SSH client software.
+The SC Agent is a lightweight, open-source utility that enables web-based console access to your computes directly from the Strettch Cloud web console. It manages the SSH connection between your browser and the compute to provide seamless terminal access without requiring SSH client software.
 
 **Supported Systems:** Ubuntu 20.04+, Debian 8+
 
@@ -11,7 +11,7 @@ View the [source code on GitHub](https://github.com/strettch/sc-console-agent)
 
 ## Automatic Installation
 
-The SC Agent installs automatically when you create a new compute instance. No action needed—just wait a few minutes after creation, then access your console from the dashboard.
+The SC Agent installs automatically when you create a new compute instance. No action needed—just wait a few minutes after creation, then access your console from the web console.
 
 ## Manual Installation
 
@@ -95,7 +95,7 @@ You should see `Active: active (running)`:
              └─578570 /usr/bin/sc-console-agent
 ```
 
-Access your console from the dashboard within a few minutes.
+Access your console from the web console within a few minutes.
 
 To check the installed agent version:
 
@@ -203,38 +203,80 @@ Purging configuration files for sc-console-agent (0.1.12) ...
 
 ## Troubleshooting
 
-### Console Not Working?
+### Console Not Accessible?
 
-1. Verify the agent is running:
-   <CodeGroup>
-   ```bash
-   systemctl status sc-console-agent
-   ```
-   </CodeGroup>
+If you can't access your compute console from the Strettch Cloud web console, follow these steps:
 
-2. Check recent logs:
-   <CodeGroup>
-   ```bash
-   sudo journalctl -u sc-console-agent -n 50
-   ```
-   </CodeGroup>
+#### Step 1: SSH into Your Virtual Machine
 
-3. Restart the service:
-   <CodeGroup>
-   ```bash
-   sudo systemctl restart sc-console-agent
-   ```
-   </CodeGroup>
+First, connect to your VM using SSH:
 
-4. Ensure firewall allows port 22 (SSH - for internal communication) and port 60500 (UDP - for console agent)
+<CodeGroup>
+```bash SSH into your VM
+ssh -p 222 root@your-vm-ip-address
+```
+</CodeGroup>
 
-### Need Help?
+Enter your password when prompted. Once logged in, proceed with the following steps.
 
-Contact support at [cloud@strettch.com](mailto:cloud@strettch.com) with:
-- Output from `systemctl status sc-console-agent`
-- Recent logs: `journalctl -u sc-console-agent -n 100`
-- Your compute instance ID
-- Description of the issue
+#### Step 2: Verify Required Ports are Open
+
+The console requires two ports to function:
+
+<CodeGroup>
+```bash Check if ports are listening
+sudo netstat -tuln | grep -E ':(22|60124)'
+```
+</CodeGroup>
+
+**Expected:** You should see port 22 (TCP) and port 60124 (UDP) listed as `LISTEN`
+
+If ports are blocked by your firewall, allow them:
+<CodeGroup>
+```bash UFW firewall
+sudo ufw allow 22/tcp
+sudo ufw allow 60124/udp
+```
+
+```bash iptables firewall
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 60124 -j ACCEPT
+```
+</CodeGroup>
+
+#### Step 3: Check if the Agent is Running
+
+<CodeGroup>
+```bash Check agent status
+systemctl status sc-console-agent
+```
+</CodeGroup>
+
+**Look for:** `Active: active (running)` in the output
+
+#### Step 4: Take Action Based on Status
+
+**If the agent is not installed** (you see `could not be found`):
+- Go to the [Manual Installation](#manual-installation) section above and install the agent
+
+**If the agent is stopped** (you see `inactive (dead)` or `failed`):
+<CodeGroup>
+```bash Restart the agent
+sudo systemctl restart sc-console-agent
+```
+
+```bash Enable auto-start on boot
+sudo systemctl enable sc-console-agent
+```
+</CodeGroup>
+
+#### Step 5: Test Console Access
+
+Wait 30-60 seconds, then try accessing your console from the web console.
+
+#### Still Not Working?
+
+Contact support at [cloud@strettch.com](mailto:cloud@strettch.com)
 
 ## Security
 
