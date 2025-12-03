@@ -52,7 +52,8 @@
             "group": "DNS",
             "pages": [
               "services/dns/overview",
-              "services/dns/managing-dns"
+              "services/dns/managing-dns",
+              "services/dns/dns-provider-guides"
             ]
           },
           {
