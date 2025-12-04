@@ -3,22 +3,22 @@ title: "How to Pay Your Bill"
 description: "Understand how our billing process works"
 ---
 
-## Payment Methods and Due Dates 
-Strettch Cloud billing cycles are monthly. Your balance accrues over the course of the calendar month based on your resource usage. Your balance is due on the first day of each month.
+## How does billing work?
+Strettch Cloud operates on a prepaid credit system. You add funds to your team's wallet, and your resource usage is deducted from this balance daily.
 
-<Warning>If your team is new, your balance may instead be due when your balance exceeds your usage threshold. Usage thresholds are predetermined spending limits for new or unverified users that, when met, triggers a charge to the team’s primary payment method. We remove usage thresholds automatically once a team has a reliable history of payments.</Warning>
 
-There are two ways to pay for your resource usage:
+## How is usage calculated?
+We track your resource usage (like Virtual Machines) continuously.
 
-* At any time during the month, you can **manually make a payment** using any valid payment method.
 
-This lets you pay for your month-to-date resource usage before it’s due, pay an overdue balance, or make a pre-payment. Pre-payments let you pay ahead of time for future resource usage.
+* **Compute (VMs):** Usage is calculated daily for the previous day. We bill by the hour. If you use a VM for part of an hour, it is rounded up to the full hour.
 
-* When your balance is due, we first apply any pre-payments, then we automatically charge the primary payment method on your team for the remaining balance.
 
-We currently accept payment using credit cards (Visa, MasterCard, American Express, Discover, UnionPay, Diners Club, and JCB), debit cards, and third-party providers (including PayPal, Google Pay, and Apple Pay). For qualifying customers, we also support direct debit from banks.
+* **Public IPs:** Billed monthly. If you hold a public IP at any point during the month, you are charged the monthly fee.
 
-## Making a Payment 
+We currently accept payment using credit cards (Visa, MasterCard, American Express, UnionPay), debit cards. We also support direct debit from banks.
+
+## How do I pay?
 
 You can make a manual payment on the **Billing tab** of the **Settings** page. Your current balance is always listed at the top of the page, next to a top-up button. The text of the button varies if the balance is overdue or if you’re making an early payment.
 
@@ -32,12 +32,19 @@ Click the topu-up button to open a payment modal. In the Payment Amount section,
      <img src="/images/billing/topup-modal.png" style={{ borderRadius: '0.2rem' }} />
     </Frame>
 
-After you enter the amount you want to pay, you can make the payment in two ways:
+After you enter the amount you want to pay. Once the payment is confirmed, your balance will be updated immediately.
 
-* **Saved Payment Methods**. You can choose from any credit card, debit card, or third-party provider that you have already saved to the team. You can also add a new credit or debit card with the Add card option in the drop-down menu.
+## When is my balance updated?
 
-To use this option, select or add a card, then click Submit Payment to pay.
+* **Top-ups:** Your balance increases as soon as we receive payment confirmation from IremboPay.
 
-* **Pay with a 3rd-Party Provider**. You can submit a one-time payment with a third-party provider, which in our case is **Irembo Pay**. To use this option, click the top-up button, then complete the transaction after you are rerouted to that provider.
+* **Usage Charges:** Your balance is debited once every 24 hours for the previous day's usage.
 
-<Note>When using **Irembo Pay**, your balance updates after your payment is processed, which often takes several hours due to processing. It also sometimes holds payments for up to 72 hours, meaning they have received your money but haven’t sent it to us yet, but the payment still applies once they release it.</Note>
+## What happens if my balance runs out?
+If your balance is insufficient:
+
+* **Past Due:** You will receive a reminder email.
+
+* **Suspension:** If payment is not made, your resources may be suspended.
+
+* **Termination:** Continued non-payment may lead to resource termination. We recommend keeping a positive balance to avoid service interruption.
