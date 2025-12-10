@@ -1,0 +1,126 @@
+---
+title: "DNS Provider Guides"
+description: "Step-by-step guides for configuring nameservers on popular domain registrars."
+---
+
+To use Strettch Cloud DNS, you need to point your domain to our nameservers. This guide provides instructions for common domain providers.
+
+The Strettch Cloud nameservers are:
+- `ns1.strettch.com`
+- `ns2.strettch.com`
+
+## Vercel
+
+If you purchased your domain through Vercel, follow these steps to change your nameservers:
+
+<Steps>
+  <Step title="Navigate to Domains">
+    Go to your Vercel Dashboard and select the project associated with your domain, or go to your team settings if it's a team domain. Navigate to the **Domains** tab.
+  </Step>
+
+  <Step title="Select Domain">
+    Click on the domain you want to configure.
+  </Step>
+
+  <Step title="Edit Nameservers">
+    Scroll down to the **Nameservers** section. By default, it will be set to "Vercel Nameservers". Switch to **Custom Nameservers**.
+  </Step>
+
+  <Step title="Enter Strettch Cloud Nameservers">
+    Enter the Strettch Cloud nameservers:
+    - `ns1.strettch.com`
+    - `ns2.strettch.com`
+  </Step>
+
+  <Step title="Save Changes">
+    Click **Save**. Propagation may take up to 24 hours.
+  </Step>
+</Steps>
+
+## Cloudflare
+
+If your domain is registered with or managed by Cloudflare:
+
+<Steps>
+  <Step title="Select Domain">
+    Log in to your Cloudflare dashboard and select your domain.
+  </Step>
+
+  <Step title="Go to DNS Settings">
+    In the sidebar, click on **DNS** and then **Records**.
+  </Step>
+
+  <Step title="Change Nameservers">
+    Scroll down to the **Cloudflare Nameservers** section (if you are on a full setup). Note that if you are on a Cloudflare Registrar plan, you might need to go to **Domain Registration** > **Manage Domain** > **Configuration**.
+    
+    If you are just using Cloudflare for DNS but registered elsewhere, you change the nameservers at your *registrar*, not Cloudflare.
+    
+    If you registered *with* Cloudflare, look for **Custom Nameservers** in the configuration.
+  </Step>
+
+  <Step title="Enter Strettch Cloud Nameservers">
+    Replace the existing nameservers with:
+    - `ns1.strettch.com`
+    - `ns2.strettch.com`
+  </Step>
+
+  <Step title="Save">
+    Save your changes.
+  </Step>
+</Steps>
+
+## Bunny.net
+
+For domains registered with Bunny.net:
+
+<Steps>
+  <Step title="Go to Domain Details">
+    Log in to the Bunny.net console and navigate to **Services** > **Domain Registration**. Click on your domain.
+  </Step>
+
+  <Step title="Nameserver Settings">
+    Click on the **Nameservers** tab in the left menu.
+  </Step>
+
+  <Step title="Use Custom Nameservers">
+    Select **Use custom nameservers**.
+  </Step>
+
+  <Step title="Add Nameservers">
+    Enter the Strettch Cloud nameservers:
+    - Nameserver 1: `ns1.strettch.com`
+    - Nameserver 2: `ns2.strettch.com`
+  </Step>
+
+  <Step title="Update">
+    Click **Update Nameservers**.
+  </Step>
+</Steps>
+
+## Namecheap
+
+For domains registered with Namecheap:
+
+<Steps>
+  <Step title="Domain List">
+    Log in to your Namecheap account and go to **Domain List**.
+  </Step>
+
+  <Step title="Manage Domain">
+    Click the **Manage** button next to your domain.
+  </Step>
+
+  <Step title="Nameservers">
+    Find the **Nameservers** section. Select **Custom DNS** from the dropdown menu.
+  </Step>
+
+  <Step title="Enter Nameservers">
+    Enter the Strettch Cloud nameservers in the provided lines:
+    - `ns1.strettch.com`
+    - `ns2.strettch.com`
+  </Step>
+
+  <Step title="Save">
+    Click the green checkmark icon to save your changes.
+  </Step>
+</Steps>
