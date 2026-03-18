@@ -43,11 +43,14 @@ Navigate to the **Computes** tab and click **New Compute** to begin. You'll conf
     After choosing the type, specify your compute specs: **CPU**, **RAM**, **Storage**. Pricing is displayed alongside each configuration so you can see costs in real-time.
   </Step>
 
-  <Step title="Set Root Password">
-    Create a secure password for root user access.
+  <Step title="Configure Authentication">
+    Choose how you will securely access your compute instance:
+
+    - **SSH Keys (Recommended)**: Select an existing SSH key attached to your team for automatic, passwordless access. See our [SSH Keys guide](/services/compute/ssh-keys) for setup instructions.
+    - **Password**: Create a secure password for root user access.
 
     <Warning>
-    Store your password securely using a password manager. You will not receive an email with your compute details or password. If you lose this password, you'll need to reset it through console access.
+    **If using a Password:** Store your password securely using a password manager. You will not receive an email with your compute details or password. If you lose it, you'll need to reset it through console access.
     </Warning>
   </Step>
 
@@ -299,9 +302,9 @@ This ensures all running processes close properly and data is written to disk be
 ### Security
 
 **Use SSH Keys Instead of Passwords**
-- SSH keys are more secure than password authentication
-- Generate a key pair locally and add your public key to `~/.ssh/authorized_keys`
-- Disable password authentication in `/etc/ssh/sshd_config`
+- SSH keys provide far stronger security against brute-force attacks than traditional passwords.
+- Strettch Cloud allows you to natively inject your SSH keys into your instances during creation.
+- Check out our [SSH Keys documentation](/services/compute/ssh-keys) to learn how to add your public keys to your team dashboard for easy, secure deployments without ever manually editing an `authorized_keys` file.
 
 **Keep Your System Updated**
 - Regularly update your operating system and packages
