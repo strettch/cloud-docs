@@ -45,7 +45,8 @@
             "group": "SC Compute",
             "pages": [
               "services/compute/overview",
-              "guides/computes"
+              "guides/computes",
+              "services/compute/ssh-keys"
             ]
           },
           {
