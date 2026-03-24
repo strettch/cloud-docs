@@ -104,3 +104,23 @@ Once you have added at least one SSH key to your team, it becomes highly recomme
 <Tip>
 Adding an SSH key during creation configures the `~/.ssh/authorized_keys` file for the default user on your compute instance, ensuring you have immediate secure access the moment it boots up.
 </Tip>
+
+---
+
+## Adding SSH Keys to an Existing Compute
+
+If you already created a compute instance without an SSH key, you can still add one manually.
+
+<Steps>
+  <Step title="Access the Instance">
+    Log into your running compute instance using your existing password.
+  </Step>
+
+  <Step title="Add the Public Key">
+    Open the `~/.ssh/authorized_keys` file on your instance and paste your public key on a new line to enable secure access.
+  </Step>
+
+  <Step title="Disable Password Auth (Optional)">
+    Edit `/etc/ssh/sshd_config`, set `PasswordAuthentication no` and restart the SSH service with `sudo systemctl restart ssh`. **Make sure accessing Compute via SSH Key works before this!**
+  </Step>
+</Steps>
