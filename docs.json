@@ -34,6 +34,12 @@
               "faqs/paying-your-bill",
               "faqs/invoices"
             ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/referrals"
+            ]
           }
         ]
       },
@@ -61,7 +67,8 @@
             "group": "Teams",
             "pages": [
               "services/teams/overview",
-              "services/teams/managing-teams"
+              "services/teams/managing-teams",
+              "services/teams/audit-logs"
             ]
           },
           {
