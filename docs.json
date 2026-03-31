@@ -113,20 +113,20 @@
     "links": [
       {
         "type": "link",
-        "label": "llms-full.txt",
-        "href": "https://docs.cloud.strettch.com/llms-full.txt"
+        "label": "Open Strettch Cloud",
+        "href": "https://cloud.strettch.com"
       },
       {
         "type": "link",
         "label": "Contact Support",
         "href": "https://api.whatsapp.com/send/?phone=250790877708&text&type=phone_number&app_absent=0"
+      },
+      {
+        "type": "link",
+        "label": "llms-full.txt",
+        "href": "https://docs.cloud.strettch.com/llms-full.txt"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Try it out",
-      "href": "https://cloud.strettch.com"
-    }
+    ]
   },
   "footer": {
     "socials": {
