@@ -1,0 +1,15 @@
+---
+title: 'List Images'
+openapi: '/api-reference/openapi.json GET /images'
+---
+
+### Response Error Codes
+
+The following table lists the programmatic error codes that this endpoint may return in the `code` field of the error response.
+
+| Code | HTTP Status | Description |
+| :--- | :--- | :--- |
+| `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
+| `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
+| `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
+
