@@ -81,6 +81,55 @@
         ]
       },
       {
+        "tab": "API Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Computes",
+            "pages": [
+              "api-reference/endpoint/list-computes",
+              "api-reference/endpoint/create-compute",
+              "api-reference/endpoint/get-compute",
+              "api-reference/endpoint/delete-compute",
+              "api-reference/endpoint/reboot-compute",
+              "api-reference/endpoint/start-compute",
+              "api-reference/endpoint/stop-compute",
+              "api-reference/endpoint/upsize-compute"
+            ]
+          },
+          {
+            "group": "Specifications",
+            "pages": [
+              "api-reference/endpoint/list-specifications"
+            ]
+          },
+          {
+            "group": "Images",
+            "pages": [
+              "api-reference/endpoint/list-images"
+            ]
+          },
+          {
+            "group": "Regions",
+            "pages": [
+              "api-reference/endpoint/list-regions"
+            ]
+          },
+          {
+            "group": "System",
+            "pages": [
+              "api-reference/endpoint/health-check"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Changelog",
         "icon": "clock-rotate-left",
         "groups": [
@@ -133,6 +182,11 @@
       "x": "https://x.com/strettchcloud",
       "website": "https://cloud.strettch.com",
       "linkedin": "https://www.linkedin.com/company/strettch-cloud/"
+    }
+  },
+  "api": {
+    "playground": {
+      "proxy": false
     }
   }
 }

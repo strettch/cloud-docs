@@ -1,0 +1,30 @@
+---
+title: 'Reboot Compute Instance'
+openapi: '/api-reference/openapi.json POST /computes/{id}/reboot'
+---
+
+### Response Error Codes
+
+The following table lists the programmatic error codes that this endpoint may return in the `code` field of the error response.
+
+#### Standard Category Codes
+
+| Code | HTTP Status | Description |
+| :--- | :--- | :--- |
+| `BAD_REQUEST` | 400 | The request was invalid or malformed. |
+| `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
+| `FORBIDDEN` | 403 | You do not have permission to perform this action. |
+| `RESOURCE_NOT_FOUND` | 404 | The compute resource was not found. |
+| `CONFLICT` | 409 | A conflict occurred with the current state of the server. |
+| `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
+| `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
+
+#### Billing & Team Actionable Codes
+
+| Code | HTTP Status | Description |
+| :--- | :--- | :--- |
+| `INSUFFICIENT_BALANCE` | 403 | Team's balance is insufficient to perform this action. |
+| `TEAM_SUSPENDED` | 403 | Team has been suspended due to an outstanding payment. |
+| `TEAM_PAST_DUE` | 403 | Team has an outstanding balance that must be paid. |
+| `TEAM_TERMINATED` | 403 | Team has been terminated and can no longer access resources. |
+

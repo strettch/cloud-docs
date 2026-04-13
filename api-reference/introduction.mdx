@@ -1,33 +1,103 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Strettch Cloud Public API Reference'
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Strettch Cloud Public API allows you to programmatically manage your cloud resources, including compute instances, specifications, regions, and more. Our API is organized around REST and returns JSON-encoded responses.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Base URL
+
+All API requests should be made to the following base URL:
+
+```bash
+https://api.strettch.cloud/api/v1
+```
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using an API Key provided as a Bearer token in the `Authorization` header.
+
+```http
+Authorization: Bearer <your_api_key>
+```
+
+You can generate and manage your API keys from the [Strettch Cloud Console](https://cloud.strettch.com/p/settings/api-keys).
+
+> [!WARNING]
+> Keep your API keys secure. Do not share them in publicly accessible areas such as GitHub, client-side code, or online forums.
+
+## Response Format
+
+The API returns responses in JSON format. All responses include a standard top-level structure to ensure consistency.
+
+### Success Response
+
+A typical success response includes a `success` flag, a `message`, and the requested `data`.
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "success": true,
+  "message": "Operation successful",
+  "data": { ... },
+  "requestId": "59ea8f7e-...",
+  "timestamp": "2024-01-15T10:00:00Z"
+}
 ```
+
+### Error Response
+
+In case of an error, the API returns a structured error object containing a programmatic `code` and a human-readable `message`.
+
+```json
+{
+  "success": false,
+  "code": "ERROR_CODE",
+  "message": "Error message description",
+  "requestId": "59ea8f7e-...",
+  "timestamp": "2024-01-15T10:00:00Z"
+}
+```
+
+## Pagination
+
+Endpoints that return a list of resources (such as `GET /computes`) are paginated. You can use the following query parameters to navigate through results:
+
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `page` | integer | `1` | The page number to retrieve. |
+| `limit` | integer | `20` | The number of items per page (max 100). |
+
+Paginated responses include a `meta` object with pagination details:
+
+```json
+{
+  "success": true,
+  "data": [...],
+  "meta": {
+    "total": 42,
+    "page": 1,
+    "limit": 20
+  }
+}
+```
+
+## Idempotency
+
+The Strettch Cloud API supports idempotency for mutation requests to prevent accidental duplicate actions (e.g., creating two servers instead of one due to a network retry).
+
+To perform an idempotent request, provide a unique key in the `Idempotency-Key` header.
+
+```http
+Idempotency-Key: <unique_uuid_v4>
+```
+
+If you retry a request with the same idempotency key, the server will return the same response as the initial request.
+
+## Rate Limiting
+
+To ensure stability and fair usage, the Strettch Cloud API enforces rate limits on all requests. When a rate limit is exceeded, the API returns a `429 Too Many Requests` status code.
+
+If you require higher limits than the standard rates, please contact our support team.
+
