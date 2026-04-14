@@ -5,19 +5,25 @@ description: 'Strettch Cloud Public API Reference'
 
 ## Welcome
 
-The Strettch Cloud Public API allows you to programmatically manage your cloud resources, including compute instances, specifications, regions, and more. Our API is organized around REST and returns JSON-encoded responses.
+Use the Strettch Cloud API to provision compute instances, automate infrastructure workflows, and integrate cloud resources directly into your applications — all through a single REST interface.
+
+Our API is organized around REST principles and returns JSON-encoded responses. Every request is authenticated, versioned, traced, and designed for reliable use in production systems.
 
 ## Base URL
 
-All API requests should be made to the following base URL:
+All API requests should be made to:
 
 ```bash
 https://api.strettch.cloud/api/v1
 ```
 
+<Note>
+  There is no sandbox environment. All API requests interact with live resources. Use caution when testing destructive operations.
+</Note>
+
 ## Authentication
 
-All API endpoints require authentication using an API Key provided as a Bearer token in the `Authorization` header.
+All endpoints require authentication via an API key passed as a Bearer token.
 
 ```http
 Authorization: Bearer <your_api_key>
@@ -25,16 +31,40 @@ Authorization: Bearer <your_api_key>
 
 You can generate and manage your API keys from the [Strettch Cloud Console](https://cloud.strettch.com/p/settings/api-keys).
 
-> [!WARNING]
-> Keep your API keys secure. Do not share them in publicly accessible areas such as GitHub, client-side code, or online forums.
+### API Key Scopes
+
+API keys inherit the permission level (Owner, Admin, or Member) of the team member who created them. This means a key can perform any action allowed by the creator's role across the team's resources.
+
+Refer to the [Team Roles & Permissions](/services/teams/overview#team-roles-and-permissions) guide for a detailed breakdown of what each role can perform.
+
+<Note>
+  In the future, you will be able to further restrict API keys to specific granular scopes (e.g., `compute:read` only). Currently, they operate with full role-level access.
+</Note>
+
+<Warning>
+  Keep your API keys secure. Do not share them in publicly accessible areas such as GitHub repositories, client-side code, or online forums. If a key is compromised, revoke it immediately from the Console.
+</Warning>
+
+### Common Authentication Errors
+
+| Status | Code | Cause |
+| :--- | :--- | :--- |
+| `401` | `UNAUTHORIZED` | Key is missing, malformed, or revoked. |
+| `403` | `FORBIDDEN` | Key lacks permission (scope) for this action. |
+
+## Request Format
+
+For all `POST`, `PUT`, and `PATCH` requests, set the `Content-Type` header:
+
+```http
+Content-Type: application/json
+```
 
 ## Response Format
 
-The API returns responses in JSON format. All responses include a standard top-level structure to ensure consistency.
+All responses return JSON with a consistent top-level structure.
 
 ### Success Response
-
-A typical success response includes a `success` flag, a `message`, and the requested `data`.
 
 ```json
 {
@@ -48,28 +78,44 @@ A typical success response includes a `success` flag, a `message`, and the reque
 
 ### Error Response
 
-In case of an error, the API returns a structured error object containing a programmatic `code` and a human-readable `message`.
-
 ```json
 {
   "success": false,
-  "code": "ERROR_CODE",
-  "message": "Error message description",
+  "code": "RESOURCE_NOT_FOUND",
+  "message": "The requested compute instance does not exist.",
   "requestId": "59ea8f7e-...",
   "timestamp": "2024-01-15T10:00:00Z"
 }
 ```
 
+The `code` field is a stable, machine-readable string you can use for programmatic error handling.
+
+**Common error codes:**
+
+| Code | HTTP Status | Description |
+| :--- | :--- | :--- |
+| `BAD_REQUEST` | `400` | Request body or parameters are malformed. |
+| `FORBIDDEN` | `403` | You do not have permission to perform this action. |
+| `RESOURCE_NOT_FOUND` | `404` | The requested resource does not exist. |
+| `TOO_MANY_REQUESTS` | `429` | Too many requests — see Rate Limiting. |
+| `INTERNAL_SERVER_ERROR` | `500` | Unexpected server-side error. |
+
 ## Pagination
 
-Endpoints that return a list of resources (such as `GET /computes`) are paginated. You can use the following query parameters to navigate through results:
+List endpoints (e.g., `GET /computes`) are paginated. Use the following query parameters:
 
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `page` | integer | `1` | The page number to retrieve. |
-| `limit` | integer | `20` | The number of items per page (max 100). |
+| `page` | integer | `1` | Page number to retrieve. |
+| `limit` | integer | `20` | Items per page (max `100`). |
 
-Paginated responses include a `meta` object with pagination details:
+Paginated responses include a `meta` object that provides context for the current result set:
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `total` | integer | The total number of items matching the query across all pages. |
+| `page` | integer | The current page number. |
+| `limit` | integer | The maximum number of items returned in this page. |
 
 ```json
 {
@@ -85,19 +131,48 @@ Paginated responses include a `meta` object with pagination details:
 
 ## Idempotency
 
-The Strettch Cloud API supports idempotency for mutation requests to prevent accidental duplicate actions (e.g., creating two servers instead of one due to a network retry).
+`POST` endpoints that create resources support idempotency to prevent duplicate actions on network retries (e.g., accidentally provisioning two servers).
 
-To perform an idempotent request, provide a unique key in the `Idempotency-Key` header.
+Pass a unique UUID v4 in the `Idempotency-Key` header:
 
 ```http
 Idempotency-Key: <unique_uuid_v4>
 ```
 
-If you retry a request with the same idempotency key, the server will return the same response as the initial request.
+**Behaviour:**
+
+- A retry with the same key returns the original response — no duplicate action is performed.
+- The response status on a replayed request is `202`, regardless of the original status code.
 
 ## Rate Limiting
 
-To ensure stability and fair usage, the Strettch Cloud API enforces rate limits on all requests. When a rate limit is exceeded, the API returns a `429 Too Many Requests` status code.
+All API requests are subject to rate limits to ensure platform stability and fair usage.
 
-If you require higher limits than the standard rates, please contact our support team.
+| Tier | Limit |
+| :--- | :--- |
+| **Standard (Reads)** | 30 requests / second per API key |
+| **Mutating (Writes)** | 5 requests / second per API key |
 
+When a rate limit is exceeded, the API returns `429 Too Many Requests`. Use the response headers to manage your request cadence efficiently:
+
+```http
+x-ratelimit-limit-second: 30
+x-ratelimit-remaining-second: 29
+x-ratelimit-reset-second: 1776144940
+```
+
+| Header | Description |
+| :--- | :--- |
+| `x-ratelimit-limit-second` | Total request allowance per second. |
+| `x-ratelimit-remaining-second` | Requests remaining in the current second. |
+| `x-ratelimit-reset-second` | The Unix timestamp when the current rate limit window expires and the quota resets. |
+
+If your system requires higher throughput for specific use cases, contact our team at [cloud@strettch.com](mailto:cloud@strettch.com).
+
+## Versioning
+
+The current API version is `v1`, reflected in every endpoint path.
+
+Breaking changes will be introduced under a new version (e.g., `/api/v2`). When a new version is released, the previous version will continue to receive support for a defined deprecation period, communicated via email and the [changelog](/changelog).
+
+Non-breaking additions (new fields, new endpoints) may be made to the current version without notice.

@@ -35,19 +35,20 @@ Teams use a role-based access control system with three levels:
 | Permission | Owner | Admin | Member |
 |------------|-------|-------|--------|
 | **Resource Management** |
-| &nbsp;&nbsp;&nbsp;&nbsp;Manage compute instances | ✓ | ✓ | ✓ |
-| &nbsp;&nbsp;&nbsp;&nbsp;Manage DNS zones | ✓ | ✓ | ✓ |
-| &nbsp;&nbsp;&nbsp;&nbsp;Configure webhooks | ✓ | ✓ | ✓ |
 | &nbsp;&nbsp;&nbsp;&nbsp;View resources | ✓ | ✓ | ✓ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Perform power actions (Start/Stop) | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Update resource configuration | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Delete resources | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Manage DNS zones & records | ✓ | ✓ | ⛔ |
 | **Team Management** |
 | &nbsp;&nbsp;&nbsp;&nbsp;Invite users | ✓ | ✓ | ⛔ |
 | &nbsp;&nbsp;&nbsp;&nbsp;Remove Members | ✓ | ✓ | ⛔ |
-| &nbsp;&nbsp;&nbsp;&nbsp;Remove Admins | ✓ | ⛔ | ⛔ |
 | &nbsp;&nbsp;&nbsp;&nbsp;Change roles | ✓ | ✓ | ⛔ |
 | &nbsp;&nbsp;&nbsp;&nbsp;Update team settings | ✓ | ✓ | ⛔ |
-| **Billing & Finance** |
+| **Billing & Audit** |
 | &nbsp;&nbsp;&nbsp;&nbsp;View billing info | ✓ | ✓ | ✓ |
 | &nbsp;&nbsp;&nbsp;&nbsp;Update payment methods | ✓ | ✓ | ⛔ |
+| &nbsp;&nbsp;&nbsp;&nbsp;Export audit logs | ✓ | ✓ | ⛔ |
 | **Critical Actions** |
 | &nbsp;&nbsp;&nbsp;&nbsp;Delete team | ✓ | ⛔ | ⛔ |
 | &nbsp;&nbsp;&nbsp;&nbsp;Transfer ownership | ✓ | ⛔ | ⛔ |
