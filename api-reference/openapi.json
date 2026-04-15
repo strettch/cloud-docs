@@ -1083,6 +1083,10 @@
             "type": "string",
             "example": "195.15.0.73"
           },
+          "privateIpv4": {
+            "type": "string",
+            "example": "10.0.0.5"
+          },
           "tags": {
             "type": "array",
             "items": {
