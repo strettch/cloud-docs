@@ -4,19 +4,12 @@ description: "Get started with Strettch Cloud, infrastructure built for scale an
 mode: "custom"
 ---
 
-export const HeroCard = ({ imageSrc, imageSrcDark, title, description, href }) => {
+export const HeroCard = ({ title, description, href, children }) => {
   return (
     <a className="group cursor-pointer pb-8" href={href}>
-      <img
-        src={imageSrc}
-        className="pointer-events-none group-hover:scale-105 transition-all duration-100 block dark:hidden"
-        alt={title}
-      />
-      <img
-        src={imageSrcDark || imageSrc}
-        className="pointer-events-none group-hover:scale-105 transition-all duration-100 hidden dark:block"
-        alt={title}
-      />
+      <div className="pointer-events-none group-hover:scale-105 transition-all duration-100">
+        {children}
+      </div>
       <h3 className="mt-5 text-gray-900 dark:text-zinc-50 font-medium">
         {title}
       </h3>
@@ -50,36 +43,40 @@ export const HeroCard = ({ imageSrc, imageSrcDark, title, description, href }) =
 
     <div className="px-6 lg:px-0 mt-12 lg:mt-24 grid sm:grid-cols-2 gap-x-6 gap-y-4">
       <HeroCard
-        imageSrc="/images/home/light/rocket.png"
-        imageSrcDark="/images/home/dark/rocket.png"
         title="Quickstart"
         description="Deploy your first compute in 2 minutes"
         href="/getting-started/quickstart"
-      />
+      >
+        <img src="/images/home/light/rocket.png" className="block dark:hidden" alt="Quickstart" />
+        <img src="/images/home/dark/rocket.png" className="hidden dark:block" alt="Quickstart" />
+      </HeroCard>
 
       <HeroCard
-        imageSrc="/images/home/light/compute.png"
-        imageSrcDark="/images/home/dark/compute.png"
         title="Compute (VMs)"
         description="Create, manage, resize, and troubleshoot computes"
         href="/guides/computes"
-      />
+      >
+        <img src="/images/home/light/compute.png" className="block dark:hidden" alt="Compute (VMs)" />
+        <img src="/images/home/dark/compute.png" className="hidden dark:block" alt="Compute (VMs)" />
+      </HeroCard>
 
       <HeroCard
-        imageSrc="/images/home/light/dns.png"
-        imageSrcDark="/images/home/dark/dns.png"
         title="Domains & DNS"
         description="Manage domains and DNS records"
         href="/guides/domains"
-      />
+      >
+        <img src="/images/home/light/dns.png" className="block dark:hidden" alt="Domains & DNS" />
+        <img src="/images/home/dark/dns.png" className="hidden dark:block" alt="Domains & DNS" />
+      </HeroCard>
 
       <HeroCard
-        imageSrc="/images/home/light/support.png"
-        imageSrcDark="/images/home/dark/support.png"
         title="Support"
         description="Get help and contact our team"
         href="/support"
-      />
+      >
+        <img src="/images/home/light/support.png" className="block dark:hidden" alt="Support" />
+        <img src="/images/home/dark/support.png" className="hidden dark:block" alt="Support" />
+      </HeroCard>
     </div>
   </div>
 </div>
