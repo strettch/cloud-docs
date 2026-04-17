@@ -5,34 +5,36 @@ openapi: '/api-reference/openapi.json PATCH /computes/{id}/upsize'
 
 ### Response Error Codes
 
-The following table lists the programmatic error codes that this endpoint may return in the `code` field of the error response.
+If the request fails, the `code` field in the error response will contain one of the following.
 
-#### Standard Category Codes
+<Tabs>
+  <Tab title="Standard">
+    | Code | Status | Description |
+    | :--- | :---: | :--- |
+    | `BAD_REQUEST` | 400 | The request was invalid or malformed. |
+    | `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
+    | `FORBIDDEN` | 403 | You do not have permission to perform this action. |
+    | `RESOURCE_NOT_FOUND` | 404 | The specified compute instance was not found. |
+    | `CONFLICT` | 409 | A conflict with the current server state occurred. |
+    | `UNPROCESSABLE_ENTITY` | 422 | The request was well-formed but failed semantic validation. |
+    | `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
+    | `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
+  </Tab>
+  <Tab title="Compute">
+    | Code | Status | Description |
+    | :--- | :---: | :--- |
+    | `COMPUTE_RUNNING` | 400 | This action cannot be performed while the compute instance is running. Please stop the instance and try again. |
+  </Tab>
+  <Tab title="Billing & Team">
+    <Warning>
+      These errors block all resource operations. Resolve your team's billing status before retrying.
+    </Warning>
 
-| Code | HTTP Status | Description |
-| :--- | :--- | :--- |
-| `BAD_REQUEST` | 400 | The request was invalid or malformed. |
-| `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
-| `FORBIDDEN` | 403 | You do not have permission to perform this action. |
-| `RESOURCE_NOT_FOUND` | 404 | The compute was not found. |
-| `CONFLICT` | 409 | A conflict occurred with the current state of the server. |
-| `UNPROCESSABLE_ENTITY` | 422 | The request was well-formed but was unable to be followed due to semantic errors. |
-| `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
-| `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
-
-#### Compute Actionable Codes
-
-| Code | HTTP Status | Description |
-| :--- | :--- | :--- |
-| `COMPUTE_RUNNING` | 400 | This action cannot be performed while the compute instance is running. Please stop the instance and try again. |
-
-#### Billing & Team Actionable Codes
-
-| Code | HTTP Status | Description |
-| :--- | :--- | :--- |
-| `INSUFFICIENT_BALANCE` | 403 | Team's balance is insufficient to perform this action. |
-| `TEAM_SUSPENDED` | 403 | Team has been suspended due to an outstanding payment. |
-| `TEAM_PAST_DUE` | 403 | Team has an outstanding balance that must be paid. |
-| `TEAM_TERMINATED` | 403 | Team has been terminated and can no longer access resources. |
-
-
+    | Code | Status | Description |
+    | :--- | :---: | :--- |
+    | `INSUFFICIENT_BALANCE` | 403 | Team balance is too low to provision this instance. |
+    | `TEAM_SUSPENDED` | 403 | Team is suspended due to an outstanding payment. |
+    | `TEAM_PAST_DUE` | 403 | Team has an outstanding balance that must be settled first. |
+    | `TEAM_TERMINATED` | 403 | Team has been terminated and can no longer access resources. |
+  </Tab>
+</Tabs>

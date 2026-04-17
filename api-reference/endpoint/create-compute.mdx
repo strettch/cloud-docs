@@ -3,28 +3,68 @@ title: 'Create Compute Instance'
 openapi: '/api-reference/openapi.json POST /computes'
 ---
 
+### Request Reference
+
+Use these slugs for the `region`, `image`, and `specification` fields in your request body.
+
+<Tabs>
+  <Tab title="Regions">
+    | Slug | Name | Country |
+    | :--- | :--- | :--- |
+    | `KGL-1` | Kigali-1 | 🇷🇼 Rwanda |
+  </Tab>
+  <Tab title="Images">
+    | Slug | OS | Version |
+    | :--- | :--- | :--- |
+    | `UBUNTU-24.04` | Ubuntu | 24.04 LTS |
+    | `UBUNTU-22.04` | Ubuntu | 22.04 LTS |
+  </Tab>
+  <Tab title="Specifications">
+    <Note>
+      All specs include local SSD storage. RAM is shown in GB except for the smallest tier.
+    </Note>
+
+    | Slug | vCPUs | RAM | Storage |
+    | :--- | :---: | :---: | :---: |
+    | `S-1C` | 1 | 512 MB | 10 GB |
+    | `S-1C-1G` | 1 | 1 GB | 20 GB |
+    | `S-1C-2G` | 1 | 2 GB | 40 GB |
+    | `S-2C-4G` | 2 | 4 GB | 80 GB |
+    | `S-4C-8G` | 4 | 8 GB | 160 GB |
+    | `S-8C-16G` | 8 | 16 GB | 320 GB |
+    | `S-16C-32G` | 16 | 32 GB | 640 GB |
+  </Tab>
+</Tabs>
+
+---
+
 ### Response Error Codes
 
-The following table lists the programmatic error codes that this endpoint may return in the `code` field of the error response.
+If the request fails, the `code` field in the error response will contain one of the following.
 
-#### Standard Category Codes
+<Tabs>
+  <Tab title="Standard">
+    | Code | Status | Description |
+    | :--- | :---: | :--- |
+    | `BAD_REQUEST` | 400 | The request was invalid or malformed. |
+    | `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
+    | `FORBIDDEN` | 403 | You do not have permission to perform this action. |
+    | `RESOURCE_NOT_FOUND` | 404 | The requested resource (image, region, or specification) was not found. |
+    | `CONFLICT` | 409 | A conflict with the current server state occurred. |
+    | `UNPROCESSABLE_ENTITY` | 422 | The request was well-formed but failed semantic validation. |
+    | `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
+    | `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
+  </Tab>
+  <Tab title="Billing & Team">
+    <Warning>
+      These errors block all resource operations. Resolve your team's billing status before retrying.
+    </Warning>
 
-| Code | HTTP Status | Description |
-| :--- | :--- | :--- |
-| `BAD_REQUEST` | 400 | The request was invalid or malformed. |
-| `UNAUTHORIZED` | 401 | Authentication failed or was not provided. |
-| `FORBIDDEN` | 403 | You do not have permission to perform this action. |
-| `RESOURCE_NOT_FOUND` | 404 | The requested resource (e.g., image, region, or specification) was not found. |
-| `CONFLICT` | 409 | A conflict occurred with the current state of the server. |
-| `UNPROCESSABLE_ENTITY` | 422 | The request was well-formed but was unable to be followed due to semantic errors. |
-| `TOO_MANY_REQUESTS` | 429 | You have exceeded the rate limit. |
-| `INTERNAL_SERVER_ERROR` | 500 | An unexpected error occurred on our end. |
-
-#### Billing & Team Actionable Codes
-
-| Code | HTTP Status | Description |
-| :--- | :--- | :--- |
-| `INSUFFICIENT_BALANCE` | 403 | Team's balance is insufficient to perform this action. |
-| `TEAM_SUSPENDED` | 403 | Team has been suspended due to an outstanding payment. |
-| `TEAM_PAST_DUE` | 403 | Team has an outstanding balance that must be paid. |
-| `TEAM_TERMINATED` | 403 | Team has been terminated and can no longer access resources. |
+    | Code | Status | Description |
+    | :--- | :---: | :--- |
+    | `INSUFFICIENT_BALANCE` | 403 | Team balance is too low to provision this instance. |
+    | `TEAM_SUSPENDED` | 403 | Team is suspended due to an outstanding payment. |
+    | `TEAM_PAST_DUE` | 403 | Team has an outstanding balance that must be settled first. |
+    | `TEAM_TERMINATED` | 403 | Team has been terminated and can no longer access resources. |
+  </Tab>
+</Tabs>
