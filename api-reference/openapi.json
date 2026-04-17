@@ -1007,7 +1007,7 @@
           "image",
           "publicKeys",
           "region",
-          "specificationId"
+          "specification"
         ],
         "properties": {
           "hostName": {
@@ -1032,9 +1032,10 @@
             "type": "string",
             "example": "KGL-1"
           },
-          "specificationId": {
+          "specification": {
+            "description": "e.g. S-1C-1G or S-1C",
             "type": "string",
-            "example": "41720b60-c094-4ae7-b6fa-0966451993db"
+            "example": "S-1C-1G"
           },
           "tags": {
             "type": "array",
@@ -1071,9 +1072,9 @@
             "type": "string",
             "example": "UBUNTU-24.04"
           },
-          "specificationId": {
+          "specification": {
             "type": "string",
-            "example": "1076fa22-b49b-4b8f-827e-20f84262916c"
+            "example": "S-1C-1G"
           },
           "region": {
             "type": "string",
@@ -1152,7 +1153,7 @@
         "properties": {
           "total": {
             "type": "integer",
-            "example": 42
+            "example": 150
           },
           "page": {
             "type": "integer",
@@ -1169,19 +1170,23 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "41720b60-c094-4ae7-b6fa-0966451993db"
-          },
-          "vcpus": {
-            "type": "integer",
-            "example": 2
+            "example": "1076fa22-b49b-4b8f-827e-20f84262916c"
           },
           "memoryMb": {
             "type": "number",
-            "example": 8000
+            "example": 512
+          },
+          "specification": {
+            "type": "string",
+            "example": "S-1C"
           },
           "storageGb": {
             "type": "number",
-            "example": 160
+            "example": 10
+          },
+          "vcpus": {
+            "type": "integer",
+            "example": 1
           }
         }
       },
@@ -1215,7 +1220,7 @@
         "properties": {
           "displayName": {
             "type": "string",
-            "example": "Ubuntu 24.04 LTS"
+            "example": "24.04 LTS"
           },
           "image": {
             "type": "string",
