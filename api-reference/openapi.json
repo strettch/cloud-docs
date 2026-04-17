@@ -1193,12 +1193,13 @@
       "UpsizeComputeRequest": {
         "type": "object",
         "required": [
-          "newSpecificationId"
+          "newSpecification"
         ],
         "properties": {
-          "newSpecificationId": {
+          "newSpecification": {
+            "description": "e.g. S-1C-1G or S-1C",
             "type": "string",
-            "example": "1076fa22-b49b-4b8f-827e-20f84262916c"
+            "example": "S-1C-1G"
           }
         }
       },

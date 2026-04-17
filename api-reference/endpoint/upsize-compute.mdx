@@ -3,6 +3,30 @@ title: 'Upsize Compute Instance'
 openapi: '/api-reference/openapi.json PATCH /computes/{id}/upsize'
 ---
 
+### Request Reference
+
+Use these slugs for the `newSpecification` field in your request body.
+
+<Tabs>
+  <Tab title="Specifications">
+    <Note>
+      The `S` prefix stands for Shared CPU. RAM in GB (512 MB for the smallest tier).
+    </Note>
+
+    | Slug | vCPUs | RAM | Storage (SSD) |
+    | :--- | :---: | :---: | :---: |
+    | `S-1C` | 1 | 512 MB | 10 GB |
+    | `S-1C-1G` | 1 | 1 GB | 20 GB |
+    | `S-1C-2G` | 1 | 2 GB | 40 GB |
+    | `S-2C-4G` | 2 | 4 GB | 80 GB |
+    | `S-4C-8G` | 4 | 8 GB | 160 GB |
+    | `S-8C-16G` | 8 | 16 GB | 320 GB |
+    | `S-16C-32G` | 16 | 32 GB | 640 GB |
+  </Tab>
+</Tabs>
+
+---
+
 ### Response Error Codes
 
 If the request fails, the `code` field in the error response will contain one of the following.
