@@ -150,22 +150,21 @@ All API requests are subject to rate limits to ensure platform stability and fai
 
 | Tier | Limit |
 | :--- | :--- |
-| **Standard (Reads)** | 30 requests / second per API key |
-| **Mutating (Writes)** | 5 requests / second per API key |
+| **All Requests** | 2 requests / second per API key |
 
 When a rate limit is exceeded, the API returns `429 Too Many Requests`. Use the response headers to manage your request cadence efficiently:
 
 ```http
-x-ratelimit-limit-second: 30
-x-ratelimit-remaining-second: 29
-x-ratelimit-reset-second: 1776144940
+x-ratelimit-limit: 2
+x-ratelimit-remaining: 1
+x-ratelimit-reset: 1776410380
 ```
 
 | Header | Description |
 | :--- | :--- |
-| `x-ratelimit-limit-second` | Total request allowance per second. |
-| `x-ratelimit-remaining-second` | Requests remaining in the current second. |
-| `x-ratelimit-reset-second` | The Unix timestamp when the current rate limit window expires and the quota resets. |
+| `x-ratelimit-limit` | Total request allowance per window. |
+| `x-ratelimit-remaining` | Requests remaining in the current window. |
+| `x-ratelimit-reset` | The Unix timestamp when the current rate limit window expires and the quota resets. |
 
 If your system requires higher throughput for specific use cases, contact our team at [cloud@strettch.com](mailto:cloud@strettch.com).
 
