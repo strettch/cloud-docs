@@ -1,5 +1,6 @@
 ---
 title: SC Compute Virtual Machines Overview
+sidebarTitle: "Overview"
 description: Learn how Strettch Cloud SC Compute virtual machines work, including instance specifications, supported images, regions, networking, and pricing.
 ---
 
@@ -48,7 +49,7 @@ Creating → Running ⟷ Stopped → Destroying → Destroyed
 | **Stopped** | Instance stopped but resources reserved | Visible | Not accessible | **Yes** | Starting, Destroying |
 | **Starting/Rebooting** | Transitioning from Stopped or rebooting | Visible | Not accessible | **Yes** | Running |
 | **Destroying** | Brief destruction process (seconds) | Visible | Not accessible | No* | Destroyed |
-| **Destroyed** | Final state - all data permanently deleted | Not visible | Not accessible | **No** | None (irreversible) |
+| **Destroyed** | Billing stops; instance no longer accessible. Not user-recoverable | Not visible | Not accessible | **No** | None |
 
 <Info>
 *Creating and Destroying states are not billable due to their very brief duration (typically seconds to less than a minute).
@@ -66,7 +67,7 @@ The **Stopped** state still incurs charges because resources remain reserved. To
 
 **Stopped**: When you stop an instance, it shuts down but all resources (CPU, RAM, storage) remain reserved for you. This means you continue to be billed at the same rate. The benefit is that you can quickly restart the instance without losing any data or configuration.
 
-**Destroying/Destroyed**: When you destroy an instance, all data is permanently deleted and resources are released. This is the only way to stop billing. Once destroyed, an instance cannot be recovered.
+**Destroying/Destroyed**: When you destroy an instance, billing stops immediately and resources are released. Destruction is final from your side — there is no self-service recovery. If you destroyed something by mistake, contact [support](mailto:cloud@strettch.com) right away; in some cases an admin may be able to recover an instance within a brief window before the underlying data is permanently removed.
 
 ---
 
