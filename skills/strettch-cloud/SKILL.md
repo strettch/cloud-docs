@@ -1,3 +1,12 @@
+---
+name: strettch-cloud
+description: Provision and manage Strettch Cloud compute instances via the Public API. Use when the user wants to create, list, start, stop, reboot, upsize, or delete cloud servers, or when they mention Strettch Cloud, KGL-1, or api.strettch.cloud.
+license: Apache-2.0
+metadata:
+  author: strettch
+  version: "1.0"
+---
+
 # Strettch Cloud API Skill
 
 A skill that gives AI full context on how to use the Strettch Cloud Public API to provision and manage compute instances.
