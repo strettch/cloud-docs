@@ -153,8 +153,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/logo-light.png",
-    "dark": "/logo/logo-dark.png"
+    "light": "/logo/logo-light.svg",
+    "dark": "/logo/logo-dark.svg"
   },
   "contextual": {
     "options": ["chatgpt", "claude", "copy", "view"]
