@@ -1,0 +1,22 @@
+name: polin-guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan for injected payloads
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve Repository Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # polin-guard --ci needs full history to see all tracked files
+
+      - name: Scan for injected payloads (polin-guard)
+        run: npx --yes polin-guard@0.3.2 --ci
