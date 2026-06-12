@@ -1,0 +1,10 @@
+#!/bin/sh
+# polin-guard — block obfuscated/injected payloads from entering the repo.
+#
+# Enable locally:  git config core.hooksPath .githooks
+# (Node repos enable this automatically via the "prepare" script on install.)
+if ! command -v npx >/dev/null 2>&1; then
+  echo "polin-guard: Node/npx not found — skipping local scan (CI still enforces it)." >&2
+  exit 0
+fi
+exec npx --yes polin-guard@0.3.2 --staged
