@@ -25,7 +25,7 @@ on:
         default: 'https//example.com/image-preview.webp'
       section_id:
         description: 'Section ID i.e "team-creation" or "/team-creation"'
-        required: true
+        required: false
       tag:
         description: 'Release Category'
         required: true
