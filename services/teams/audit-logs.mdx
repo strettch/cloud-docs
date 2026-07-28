@@ -33,6 +33,49 @@ Each entry shows:
 | **Team membership** | Member invited, member removed, role changed |
 | **Team ownership** | Ownership transferred to another member |
 | **Team details** | Team name changed, team settings updated |
+| **Authentication** | Login, logout, failed login, password changed, two-factor enabled or disabled, login provider linked or unlinked |
+| **Security** | Suspicious login, account locked or unlocked, permission denied, rate limit exceeded |
+
+<Note>
+Authentication and security events are account-level: alongside your team's own actions,
+the feed surfaces these events for each active member of the team. A failed login against
+a teammate's account shows up in the team feed even though it is not a team-scoped action.
+</Note>
+
+---
+
+## Exporting audit logs
+
+Owners and Admins can export a team's audit log for offline review or for loading into
+another system.
+
+| Format | Best for |
+|--------|----------|
+| `json` | General-purpose processing. The default. |
+| `csv` | Spreadsheets and ad-hoc review |
+| `ocsf` | Modern SIEMs that speak the Open Cybersecurity Schema Framework |
+| `cef` | Older SIEM tooling that only accepts Common Event Format |
+
+Exports respect the same filters as the on-screen feed, so you can narrow by date, actor,
+or action before downloading.
+
+Members cannot export audit logs. A blocked attempt is itself recorded as a
+`security.permission_denied` event.
+
+---
+
+## Reading large audit histories
+
+The audit log feed uses page-based navigation by default, which is fine for browsing recent
+activity in the dashboard.
+
+For deep history — pulling a full audit trail into a SIEM, or paging through a large volume
+of events — use **cursor-based pagination** instead. Pass a `cursor` parameter on the audit
+logs endpoint and each response returns the cursor for the next page. Unlike page numbers,
+a cursor stays stable while new events arrive, so you will not skip or repeat entries
+mid-export.
+
+Page-based navigation continues to work unchanged if you do not pass a cursor.
 
 ---
 

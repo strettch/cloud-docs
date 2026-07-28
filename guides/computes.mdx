@@ -20,13 +20,20 @@ Navigate to the **Computes** tab and click **New Compute** to begin. You'll conf
   </Step>
 
   <Step title="Choose Image">
-    Select an operating system image for your compute.
+    Select the image your compute boots from. Images come in two kinds, labelled **OS** and **Application** in the picker.
 
     <Frame>
       <img src="/images/computes/choose-image.png" style={{ borderRadius: "0.2rem" }} />
     </Frame>
 
-    Available images include popular Linux distributions. Choose based on your application requirements and team familiarity.
+    - **OS images** are plain Linux distributions such as Ubuntu and Debian. Pick one when you want a clean server to configure yourself. OS images let you choose a specific version.
+    - **Application images** ship with software pre-installed and configured — for example Coolify, Dokploy, or Supabase. Pick one when you want that application running without setting it up by hand.
+
+    Application images have a **See Details** link that opens a setup guide for that image: what is installed, how to reach it after the instance boots, and any first-run steps.
+
+    <Note>
+    Application images can require a minimum specification. If an image needs more vCPU, RAM, or storage than a given specification provides, that specification is disabled in the next step and the picker tells you the minimum the image requires.
+    </Note>
   </Step>
 
   <Step title="Choose Type and Specifications">
@@ -41,16 +48,42 @@ Navigate to the **Computes** tab and click **New Compute** to begin. You'll conf
     **Dedicated CPU**: Consistent performance for production workloads
 
     After choosing the type, specify your compute specs: **CPU**, **RAM**, **Storage**. Pricing is displayed alongside each configuration so you can see costs in real-time.
+
+    Specifications that fall below the minimum required by your chosen image are disabled here, with the required minimum shown as the reason.
   </Step>
 
   <Step title="Configure Authentication">
     Choose how you will securely access your compute instance:
 
-    - **SSH Keys (Recommended)**: Select an existing SSH key attached to your team for automatic, passwordless access. See our [SSH Keys guide](/services/compute/ssh-keys) for setup instructions.
-    - **Password**: Create a secure password for root user access.
+    - **Root Password**: Create a password for root user access. This is the option selected by default.
+    - **SSH Key**: Select an existing SSH key attached to your team for automatic, passwordless access. See our [SSH Keys guide](/services/compute/ssh-keys) for setup instructions.
+
+    For long-lived instances we still suggest SSH keys — see [Security](#security) under Best Practices below.
+
+    <AccordionGroup>
+    <Accordion title="Root password requirements" icon="lock" iconType="solid">
+    A root password is rejected unless it meets every rule below:
+
+    | Rule | Requirement |
+    |------|-------------|
+    | Length | Between 10 and 128 characters |
+    | Lowercase | At least one lowercase letter |
+    | Uppercase | At least one uppercase letter |
+    | Number | At least one number |
+    | Special character | At least one special character |
+    | Character set | Printable ASCII only — no spaces, accented letters, or emoji |
+    | First character | Must be a letter, not a number or special character |
+    | Last character | Must not be a number or special character |
+    | Strength | Must not be easy to guess |
+
+    The strength check is what rejects passwords that tick every other box but are still predictable — common words, keyboard patterns, sequences, or anything built from your compute's hostname. `Test@123`, `Password1!`, and `Qwerty2024!` are all rejected.
+
+    If a password is rejected, the error lists exactly which rules it failed.
+    </Accordion>
+    </AccordionGroup>
 
     <Warning>
-    **If using a Password:** Store your password securely using a password manager. You will not receive an email with your compute details or password. If you lose it, you'll need to reset it through console access.
+    **If using a Root Password:** Store your password securely using a password manager. You will not receive an email with your compute details or password. If you lose it, you'll need to reset it through console access.
     </Warning>
   </Step>
 
