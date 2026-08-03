@@ -10,7 +10,7 @@ description: "Deploy a private Coolify instance to run apps, databases, and serv
 
 ## Overview
 
-Coolify is a self-hostable PaaS — deploy apps, databases, and services on your own infrastructure through a web dashboard.
+Coolify is a self-hostable PaaS used to deploy apps, databases, and services on your own infrastructure through a web dashboard.
 
 This image comes with Coolify installed but switched off: the web port stays closed until you run setup, so nobody can claim the admin account before you do. Setup takes about three minutes and runs the first time you log in.
 
@@ -22,7 +22,7 @@ Everything below sits on top of a stock Ubuntu 24.04 server.
 |---|---|
 | Coolify | The platform, plus the Postgres and Redis containers it runs on |
 | Docker and Compose | Runs Coolify and whatever you deploy with it |
-| `ufw` | Firewall, already configured — see Security below |
+| `ufw` | Firewall, already configured (see Security below) |
 | `fail2ban` | Blocks IPs that keep failing SSH logins |
 | `unattended-upgrades` | Applies Ubuntu security updates on its own |
 | `sc-console-agent` | Runs the browser console in the Strettch Cloud dashboard |
@@ -42,9 +42,9 @@ The root password and SSH key are in the Strettch Cloud console. Setup starts au
 
 Setup asks for:
 
-- **Admin email** — what you will log in with
-- **Domain name** — optional. Leave it blank and Coolify uses your Compute's IP
-- **SMTP** — also optional. Answer `n` and add it later from the UI whenever you want
+- **Admin email**: This is what you will log in.
+- **Domain name**: This is optional and you can leave it blank since Coolify uses your Compute's IP
+- **SMTP**: This is also optional. Answer `n` and add it later from the UI whenever you want
 
 Coolify generates the admin password for you and prints it at the end. Everything else it handles on its own.
 
@@ -65,7 +65,7 @@ If your Compute has a public IP, use that one, you will find it in the console. 
   ```
 </Warning>
 
-Coolify has its own onboarding after this — follow what it shows you, since the steps change between releases. Its documentation lives at [coolify.io/docs](https://coolify.io/docs).
+Coolify has its own onboarding after this follow what it shows you, since the steps change between releases. Its documentation lives at [coolify.io/docs](https://coolify.io/docs).
 
 ## 4. Add a domain and HTTPS
 
@@ -83,7 +83,7 @@ Optional, but worth doing if you have a domain. Point an A record at your Comput
 
 The firewall allows SSH, HTTP, HTTPS, the Coolify UI, and the Strettch Cloud agent. Everything else coming in is blocked.
 
-`fail2ban` watches SSH — ten failed logins bans an IP for six hours, with longer bans for repeat offenders, up to a week.
+`fail2ban` watches SSH however ten failed logins ban an IP for six hours, with longer bans for repeat offenders, up to a week.
 
 ```bash
 fail2ban-client status sshd

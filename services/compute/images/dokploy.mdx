@@ -42,9 +42,9 @@ The root password and SSH key are in the Strettch Cloud console. Setup starts au
 
 Setup asks for:
 
-- **Admin email**: what you will log in with
-- **Your name**: used as the display name. Press Enter to accept `Admin`
-- **Admin password**: — at least twelve characters, typed twice
+- **Admin email**: This is what you will use to log in.
+- **Your name**: will be used as the display name. Press Enter to accept `Admin`
+- **Admin password**: make sure it is at least twelve characters, typed twice
 
 <Warning>
   Pick and save a strong password. Whoever holds the Dokploy admin login controls the whole server. Everything else, setup handles on its own.
@@ -76,7 +76,7 @@ Optional, but worth doing if you have a domain. Point an A record at your Comput
 
 The firewall allows SSH, HTTP, HTTPS, the Dokploy UI, and the Strettch Cloud agent. Everything else coming in is blocked.
 
-`fail2ban` watches SSH — ten failed logins bans an IP for six hours, with longer bans for repeat offenders, up to a week.
+`fail2ban` watches SSH however ten failed logins bans an IP for six hours, with longer bans for repeat offenders, up to a week.
 
 ```bash
 fail2ban-client status sshd

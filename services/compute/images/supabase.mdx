@@ -100,7 +100,10 @@ ufw status
 ```
 
 <Note>
-  Postgres isn't reachable from the internet by default. Go through the API gateway, or open the port yourself if you need a direct connection.
+  Postgres access depends on how the Supabase stack's Docker ports are configured.
+  Verify your own exposure with `nc -zv YOUR_COMPUTE_IP 5432` from an external
+  machine since Docker's own port publishing can bypass `ufw` rules even when
+  `ufw status` shows the port as blocked.
 </Note>
 
 If setup is interrupted partway through, nothing is exposed. Log in again and it starts over.
