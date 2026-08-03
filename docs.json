@@ -52,7 +52,15 @@
             "pages": [
               "services/compute/overview",
               "guides/computes",
-              "services/compute/ssh-keys"
+              "services/compute/ssh-keys",
+              {
+                "group": "Application Images",
+                "pages": [
+                  "services/compute/images/supabase",
+                  "services/compute/images/dokploy",
+                  "services/compute/images/coolify"
+                ]
+              }
             ]
           },
           {
