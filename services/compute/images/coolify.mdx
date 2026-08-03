@@ -1,0 +1,95 @@
+---
+title: "Coolify"
+description: "Deploy a private Coolify instance to run apps, databases, and services on your own infrastructure, preinstalled on a Strettch Cloud Compute."
+---
+
+<Info>
+  **Category:** paas · baas · devops · self-hosted
+  **OS:** Ubuntu 24.04 · **Version:** 4.1.1
+</Info>
+
+## Overview
+
+Coolify is a self-hostable PaaS used to deploy apps, databases, and services on your own infrastructure through a web dashboard.
+
+This image comes with Coolify installed but switched off: the web port stays closed until you run setup, so nobody can claim the admin account before you do. Setup takes about three minutes and runs the first time you log in.
+
+## What is on this image
+
+Everything below sits on top of a stock Ubuntu 24.04 server.
+
+| Software | What it does |
+|---|---|
+| Coolify | The platform, plus the Postgres and Redis containers it runs on |
+| Docker and Compose | Runs Coolify and whatever you deploy with it |
+| `ufw` | Firewall, already configured (see Security below) |
+| `fail2ban` | Blocks IPs that keep failing SSH logins |
+| `unattended-upgrades` | Applies Ubuntu security updates on its own |
+| `sc-console-agent` | Runs the browser console in the Strettch Cloud dashboard |
+| `sc-metrics-agent` | Sends CPU, memory, and disk metrics to your dashboard |
+
+## 1. Connect
+
+Once your Compute is running, SSH in as root:
+
+```bash
+ssh root@YOUR_COMPUTE_IP
+```
+
+The root password and SSH key are in the Strettch Cloud console. Setup starts automatically when you log in. If you would rather work from the browser console, run `/opt/sc/coolify/setup.sh` there instead.
+
+## 2. Answer three questions
+
+Setup asks for:
+
+- **Admin email**: This is what you will log in.
+- **Domain name**: This is optional and you can leave it blank since Coolify uses your Compute's IP
+- **SMTP**: This is also optional. Answer `n` and add it later from the UI whenever you want
+
+Coolify generates the admin password for you and prints it at the end. Everything else it handles on its own.
+
+## 3. Log in
+
+Setup prints your URL, email, and password when it finishes. Open the URL:
+
+```
+http://YOUR_COMPUTE_IP:8000
+```
+
+If your Compute has a public IP, use that one, you will find it in the console. When required any login details use the previous email and password you entered in your compute. 
+
+<Warning>
+  Copy the password into your password manager, then delete the server's copy:
+  ```bash
+  rm /root/.sc-credentials
+  ```
+</Warning>
+
+Coolify has its own onboarding after this follow what it shows you, since the steps change between releases. Its documentation lives at [coolify.io/docs](https://coolify.io/docs).
+
+## 4. Add a domain and HTTPS
+
+Optional, but worth doing if you have a domain. Point an A record at your Compute's public IP, then set the domain in Coolify. It requests a certificate for you automatically, and ports 80 and 443 are already open.
+
+## Managing it
+
+| Command | What it does |
+|---|---|
+| `/opt/sc/coolify/info.sh` | Prints your URL and admin email again |
+| `/opt/sc/coolify/status.sh` | Shows whether Coolify is running, which ports are open, and disk usage |
+| `/opt/sc/coolify/debug.sh` | Collects logs for support, with secrets stripped out |
+
+## Security
+
+The firewall allows SSH, HTTP, HTTPS, the Coolify UI, and the Strettch Cloud agent. Everything else coming in is blocked.
+
+`fail2ban` watches SSH however ten failed logins ban an IP for six hours, with longer bans for repeat offenders, up to a week.
+
+```bash
+fail2ban-client status sshd
+ufw status
+```
+
+<Note>
+  If you cancel setup partway through or mistype something, nothing is exposed. Log in again and it starts over.
+</Note>
